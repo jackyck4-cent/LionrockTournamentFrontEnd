@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Tournaments</h1>
+  <!-- 
+    <button>Filter button 1</button>
+    <button>Filter button 2</button>
+    <button>Filter button 3</button>
+    <button>Filter button 4</button> 
+    -->
+
+  <div class="button-row">
+    <mat-button-toggle-group
+      name="tn-list-filters"
+      aria-label="Filters"
+      multiple
+    >
+      <mat-button-toggle value="registed">My Tournaments</mat-button-toggle>
+      <mat-button-toggle value="owned">Owned</mat-button-toggle>
+      <mat-button-toggle value="enrolling">Enrolling</mat-button-toggle>
+      <mat-button-toggle value="started">Started</mat-button-toggle>
+      <mat-button-toggle value="completed">Completed</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <br>
+  <app-tn-list></app-tn-list>
+</div>

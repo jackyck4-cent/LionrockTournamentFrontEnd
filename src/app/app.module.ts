@@ -13,7 +13,17 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './pages/home/home.component';
+import {HomeComponent} from './pages/home/home.component';
+import {WelcomeMessageComponent} from './components/welcome-message/welcome-message.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {WelcomePageComponent} from './pages/welcome-page/welcome-page.component';
+import {TnListPageComponent} from './pages/tn-list-page/tn-list-page.component';
+import {TnListComponent} from './components/tn-list/tn-list.component';
+import {TnListItemComponent} from './components/tn-list-item/tn-list-item.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -24,6 +34,11 @@ import { HomeComponent } from './pages/home/home.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    WelcomeMessageComponent,
+    WelcomePageComponent,
+    TnListPageComponent,
+    TnListComponent,
+    TnListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +46,11 @@ import { HomeComponent } from './pages/home/home.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatSortModule,
   ],
   providers: [
     {

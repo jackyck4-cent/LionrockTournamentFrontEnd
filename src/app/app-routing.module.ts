@@ -8,6 +8,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { AuthGuard } from './shared/auth.guard';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { TnListPageComponent } from './pages/tn-list-page/tn-list-page.component';
 
 const routes: Routes = [
 //  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
@@ -19,6 +21,8 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'tn-list', component: TnListPageComponent },
 ];
 
 @NgModule({
