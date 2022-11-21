@@ -1,0 +1,26 @@
+<div class="container">
+  
+  <h1>Tournament Details</h1>
+
+  <app-tn-detail
+    [tn_info]="tn_info"
+    [config]="tn_detail__displayconfig"
+  ></app-tn-detail>
+
+  <div class="button-row">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onButton('manage')"
+      [hidden]="!isHiddenButton('manage')"
+    >Manage</button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onButton('register')"
+      [hidden]="!isHiddenButton('register')"
+    >Register</button>
+
+  </div>
+</div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TnListItemComponent } from './tn-list-item.component';
+import { TnDetailPageComponent } from './tn-detail-page.component';
 
-describe('TnListItemComponent', () => {
-  let component: TnListItemComponent;
-  let fixture: ComponentFixture<TnListItemComponent>;
+describe('TnDetailPageComponent', () => {
+  let component: TnDetailPageComponent;
+  let fixture: ComponentFixture<TnDetailPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TnListItemComponent ]
+      declarations: [ TnDetailPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TnListItemComponent);
+    fixture = TestBed.createComponent(TnDetailPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

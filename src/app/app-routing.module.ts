@@ -10,9 +10,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AuthGuard } from './shared/auth.guard';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { TnListPageComponent } from './pages/tn-list-page/tn-list-page.component';
+import { TnDetailPageComponent } from './pages/tn-detail-page/tn-detail-page.component';
 
 const routes: Routes = [
-//  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
+  //  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'log-in', component: SigninComponent },
   { path: 'sign-up', component: SignupComponent },
@@ -21,13 +22,20 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard],
   },
+  
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'tn-list', component: TnListPageComponent },
+  
+  { path: 'tn-detail',
+    children: [
+      { path: ':id', component: TnDetailPageComponent },
+      { path: '**', redirectTo: '/tn-list' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-
 export class AppRoutingModule {}

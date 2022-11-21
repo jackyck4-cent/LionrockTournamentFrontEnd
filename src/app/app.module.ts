@@ -19,11 +19,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WelcomePageComponent} from './pages/welcome-page/welcome-page.component';
 import {TnListPageComponent} from './pages/tn-list-page/tn-list-page.component';
 import {TnListComponent} from './components/tn-list/tn-list.component';
-import {TnListItemComponent} from './components/tn-list-item/tn-list-item.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSortModule} from '@angular/material/sort';
+import {TnDetailPageComponent} from './pages/tn-detail-page/tn-detail-page.component';
+import {BoutGridSmallComponent} from './components/bout-grid-small/bout-grid-small.component';
+import {MatInputModule} from '@angular/material/input';
+import {TnDetailComponent} from './components/tn-detail/tn-detail.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,9 @@ import {MatSortModule} from '@angular/material/sort';
     WelcomePageComponent,
     TnListPageComponent,
     TnListComponent,
-    TnListItemComponent,
+    TnDetailPageComponent,
+    BoutGridSmallComponent,
+    TnDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +58,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatButtonModule,
     MatButtonToggleModule,
     MatSortModule,
+    MatInputModule,
+    MatRadioModule,
+    MatFormFieldModule,
   ],
   providers: [
     {
