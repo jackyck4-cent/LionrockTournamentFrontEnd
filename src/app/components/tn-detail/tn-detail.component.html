@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-label>Size </mat-label>
-    <div *ngIf="config.readonly.includes('description'); else size__show_radio_buttons">
+    <div *ngIf="config.readonly.includes('size'); else size__show_radio_buttons">
       <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('size')" >
         <input matInput name="size" [(ngModel)]="tn_info.size" [readonly]="true" />
       </mat-form-field>
