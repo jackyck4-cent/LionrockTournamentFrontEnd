@@ -11,6 +11,8 @@ import { AuthGuard } from './shared/auth.guard';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { TnListPageComponent } from './pages/tn-list-page/tn-list-page.component';
 import { TnDetailPageComponent } from './pages/tn-detail-page/tn-detail-page.component';
+import { TnManagePageComponent } from './pages/tn-manage-page/tn-manage-page.component';
+import { TnCreatePageComponent } from './pages/tn-create-page/tn-create-page.component';
 
 const routes: Routes = [
   //  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
@@ -32,6 +34,19 @@ const routes: Routes = [
       { path: '**', redirectTo: '/tn-list' },
     ],
   },
+  { path: 'tn-manage',
+  children: [
+    { path: ':id', component: TnManagePageComponent },
+    { path: '**', redirectTo: '/tn-list' },
+  ],
+},
+  { path: 'tn-create',
+  children: [
+    { path: ':id', component: TnCreatePageComponent },
+    { path: '**', redirectTo: '/tn-list' },
+  ],
+},
+
 ];
 
 @NgModule({

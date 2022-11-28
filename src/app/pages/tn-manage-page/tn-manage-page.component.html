@@ -1,0 +1,60 @@
+<div class="container">
+  
+    <h1>Tournament Management</h1>
+  
+    <app-tn-detail
+      [tn_info]="tn_info"
+      [config]="tn_detail__displayconfig"
+    ></app-tn-detail>
+  
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onButton('confirm')"
+        [hidden]="!isHiddenButton('confirm')"
+      >Confirm</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('start_enrolling')"
+          [hidden]="!isHiddenButton('start_enrolling')"
+        >Start Enrolling</button>      
+        
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('start_game')"
+          [hidden]="!isHiddenButton('start_game')"
+        >Start Game</button>    
+        
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('cancel')"
+          [hidden]="!isHiddenButton('cancel')"
+        >Cancel</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('delete')"
+          [hidden]="!isHiddenButton('delete')"
+        >Delete</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('update_result')"
+          [hidden]="!isHiddenButton('update_result')"
+        >Update Result</button>      
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('proceed')"
+          [hidden]="!isHiddenButton('proceed')"
+          >Proceed to Next Round</button>        
+    </div>
+  </div>
+  
