@@ -1,4 +1,59 @@
-<div>
-    <p>bout-grid-small works!</p>
-</div>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8"
+>
 
+  <ng-container matColumnDef="tn_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tournament ID</th>
+    <td mat-cell *matCellDef="let element">
+      <a href="/tn-detail/{{ element.tn_id }}">{{ element.tn_id }}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="round_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Round ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.round_id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="match_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Match ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.match_id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="player_1">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Player 1</th>
+    <td mat-cell *matCellDef="let element">{{ element.player_1 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="player_2">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Player 2</th>
+    <td mat-cell *matCellDef="let element">{{ element.player_2 }}</td>
+  </ng-container>
+
+   <ng-container matColumnDef="score_1">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Score 1</th>
+    <td mat-cell *matCellDef="let element">{{ element.score_1 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="score_2">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Score 2</th>
+    <td mat-cell *matCellDef="let element">{{ element.score_2 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="winner">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true">Winner</th>
+    <td mat-cell *matCellDef="let element">{{ element.winner }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true">Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+</table>
