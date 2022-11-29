@@ -61,8 +61,8 @@
           aria-labelledby="v-tabs-16-tab"
           *ngFor="let data of round_of_16"
         >
-          <div *ngFor="let bout of data; let i = index">
-              {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
+          <div style="padding-bottom:10px" *ngFor="let bout of data; let i = index">
+            <button mat-stroked-button>{{ data[i].player_1 }}</button>  vs <button mat-stroked-button>{{ data[i].player_2 }}</button>  status: {{ data[i].status }}
           </div>
         </div>
         <div
@@ -84,7 +84,7 @@
           *ngFor="let data of semi_finals"
         >
           <div *ngFor="let bout of data; let i = index">
-            {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
+            {{ data[i].player_1 }} vs {{ data[i].player_2 }}  status:{{ data[i].status }}
           </div>
         <div
           class="tab-pane fade"
