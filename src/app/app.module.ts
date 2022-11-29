@@ -29,6 +29,8 @@ import {MatInputModule} from '@angular/material/input';
 import {TnDetailComponent} from './components/tn-detail/tn-detail.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { TnManagePageComponent } from './pages/tn-manage-page/tn-manage-page.component';
+import { TnCreatePageComponent } from './pages/tn-create-page/tn-create-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     TnDetailPageComponent,
     BoutGridSmallComponent,
     TnDetailComponent,
+    TnManagePageComponent,
+    TnCreatePageComponent,
   ],
   imports: [
     BrowserModule,
