@@ -11,6 +11,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { TnListPageComponent } from './pages/tn-list-page/tn-list-page.component';
 import { TnDetailPageComponent } from './pages/tn-detail-page/tn-detail-page.component';
+import { BoutGridSmallComponent } from './components/bout-grid-small/bout-grid-small.component';
 
 const routes: Routes = [
   //  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'tn-list', component: TnListPageComponent },
+  { path: 'bout-grid-small', component: BoutGridSmallComponent },
   
   { path: 'tn-detail',
     children: [
