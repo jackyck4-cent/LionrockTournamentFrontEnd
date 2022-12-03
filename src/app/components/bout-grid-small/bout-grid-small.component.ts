@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
@@ -24,7 +24,7 @@ export class BoutGridSmallComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private backend: DummyBackendService) { }
+  constructor(private backend: BackendService) { }
 
   ngOnInit(): void {
     console.log(`bout-grid-small: tn_id=${this.tn_id}`);
@@ -38,7 +38,7 @@ export class BoutGridSmallComponent implements OnInit {
 
   getUserNameCssClasses(user_id: string): string {
     // TODO: temporary use 'a0001' for current user, need to change here
-    return `username ${user_id == 'a0001' ? 'username-self': ''}`;
+    return `username ${user_id == 'a0001' ? 'username-self': (user_id ? '': 'username-empty')}`;
   }
 
   onClick(round: string, user_id: string): void {

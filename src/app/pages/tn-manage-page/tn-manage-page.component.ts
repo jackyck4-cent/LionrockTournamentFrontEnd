@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DUMMY_TN_INFOS } from 'src/app/shared/dummy_data';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
-import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 
 @Component({
@@ -24,7 +24,7 @@ export class TnManagePageComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private route: ActivatedRoute, backend: DummyBackendService) {
+  constructor(private route: ActivatedRoute, backend: BackendService) {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     [this.players_info, this.tn_info] = backend.getTn(this.tn_id)
     console.log(this.tn_info);

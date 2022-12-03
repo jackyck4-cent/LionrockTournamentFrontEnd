@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
-import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 
 @Component({
@@ -23,7 +23,7 @@ export class TnDetailPageComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private route: ActivatedRoute, private backend: DummyBackendService) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService) { }
 
   ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';

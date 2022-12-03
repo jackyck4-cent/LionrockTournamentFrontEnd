@@ -3,7 +3,7 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { TnInfo } from 'src/app/shared/tn_info';
-import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 
 // let dummy_tn_infos = Array.from(DUMMY_TN_INFOS.values());
@@ -20,7 +20,7 @@ export class TnListComponent implements OnInit, AfterViewInit {
   private all_players_info: Map<string, PlayerInfo>;
   private all_tn_info: Map<string, TnInfo>;
 
-  constructor(private backend: DummyBackendService, private _liveAnnouncer: LiveAnnouncer) { 
+  constructor(private backend: BackendService, private _liveAnnouncer: LiveAnnouncer) { 
     [this.all_players_info, this.all_tn_info] = this.backend.getTnList();
     this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
   }
