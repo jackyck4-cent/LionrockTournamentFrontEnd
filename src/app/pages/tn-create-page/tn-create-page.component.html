@@ -1,0 +1,26 @@
+<div class="container">
+  
+    <div class="page-title">Create New Tournament</div>
+
+    <app-tn-detail
+      [tn_id]="tn_id"
+      [config]="tn_detail__displayconfig"
+    ></app-tn-detail>
+  
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onButton('confirm')"
+        [hidden]="!isHiddenButton('confirm')"
+      >Confirm</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onButton('start_enrolling')"
+        [hidden]="!isHiddenButton('start_enrolling')"
+      >Cancel</button>      
+    
+    </div>
+  </div>
+  

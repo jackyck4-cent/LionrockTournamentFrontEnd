@@ -1,0 +1,24 @@
+.tn-detail-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.tn-detail-full-width {
+  width: 100%;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+
+.tn-info--size {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 8px;
+}
+
+input:read-write {
+  font-weight: bold;
+  color: indigo;
+}
