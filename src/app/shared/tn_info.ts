@@ -10,7 +10,7 @@ export class TnInfo {
     players!: string[];     // list of player's user id
     current_round!: string; // current round: ''=dontcare, '2'=final, '4'=semi-final, '8'=quarter-final, '16'=round-of-16
     champion!: string;
-    bouts!: Map<string, Array<Array<string>>>;
+    bouts!: {[key: string]: string[][]};
         // {
         //   '2': [
         //     // 1st-player, 2nd-player, winner

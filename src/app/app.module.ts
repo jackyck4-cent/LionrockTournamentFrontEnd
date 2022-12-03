@@ -10,7 +10,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {HomeComponent} from './pages/home/home.component';
@@ -23,6 +23,7 @@ import {TnDetailPageComponent} from './pages/tn-detail-page/tn-detail-page.compo
 import {TnDetailComponent} from './components/tn-detail/tn-detail.component';
 import { TnManagePageComponent } from './pages/tn-manage-page/tn-manage-page.component';
 import { TnCreatePageComponent } from './pages/tn-create-page/tn-create-page.component';
+import { SplitColumnsPipe } from './pipes/split-columns.pipe';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,7 +36,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
-import { SplitColumnsPipe } from './split-columns.pipe';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { SplitColumnsPipe } from './split-columns.pipe';
     MatDividerModule,
     MatTabsModule,
     MatListModule,
+    MatDatepickerModule,
   ],
   providers: [
     {

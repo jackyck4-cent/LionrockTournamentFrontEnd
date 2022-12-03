@@ -23,7 +23,6 @@ export class BoutGridSmallComponent implements OnInit {
 
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
-  datasource_bouts!: MatTableDataSource<TnInfo>;
 
   constructor(private backend: DummyBackendService) { }
 
@@ -34,10 +33,15 @@ export class BoutGridSmallComponent implements OnInit {
   }
 
   getUserName(user_id: string): string {
-    return this.players_info.get(user_id)?.name || '<unknown-user>';
+    return this.players_info.get(user_id)?.name ?? '---';
   }
 
   getUserNameCssClasses(user_id: string): string {
+    // TODO: temporary use 'a0001' for current user, need to change here
     return `username ${user_id == 'a0001' ? 'username-self': ''}`;
+  }
+
+  onClick(round: string, user_id: string): void {
+    console.log(`clicked... Round ${round} / User ${user_id}`);
   }
 }

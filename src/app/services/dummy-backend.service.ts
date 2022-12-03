@@ -9,7 +9,7 @@ import { TnInfo } from '../shared/tn_info';
 export class DummyBackendService {
   backend_name: string;
   private all_players!: Map<string, PlayerInfo>;
-  private all_tn_infos!: Map<string, TnInfo>;
+  private all_tn_infos!: any; //Map<string, TnInfo>;
   private next_tn_id: number = 0;
 
   constructor() {
@@ -19,7 +19,8 @@ export class DummyBackendService {
     );
     this.all_tn_infos = new Map<string, TnInfo>();
     for (const [k, v] of Object.entries(DUMMYDATA.tournaments)) {
-      this.all_tn_infos.set(k, <TnInfo>(<unknown>v));
+      let tn = Object.assign(new TnInfo(), v);
+      this.all_tn_infos.set(k, tn);
     }
   }
 

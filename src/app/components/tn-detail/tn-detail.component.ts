@@ -40,4 +40,32 @@ export class TnDetailComponent implements OnInit {
   isShowPlayerList(): boolean {
     return this.tn_info.status == 'draft' || this.tn_info.status == 'enrolling';
   }
+
+  getStatusDisplay(): string {
+    switch (this.tn_info.status) {
+      case 'enrolling':
+        let vacancy = this.tn_info.size - this.tn_info.players.length;
+        if (vacancy == 0) {
+          return `Enrolling, full`;
+        }
+        if (vacancy == 1) {
+          return `Enrolling, ${vacancy} vacancy`;
+        }
+        return `Enrolling, ${vacancy} vacancies`;
+        
+      case 'started':
+        switch (this.tn_info.current_round) {
+          case '_2': return 'Final';
+          case '_4': return 'Semi-final';
+          case '_8': return 'Quarter-final';
+          case '_16': return 'Round of 16';
+        }
+        return '';
+      case 'completed':
+        return `Champion is ${this.getUserName(this.tn_info.champion)}`;
+      case 'draft':
+        return 'Draft';
+    }
+    return '';
+  }
 }

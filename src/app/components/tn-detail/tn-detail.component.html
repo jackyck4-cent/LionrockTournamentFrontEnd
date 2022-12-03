@@ -33,7 +33,7 @@
         </mat-radio-group>
       </div>
     </ng-template>
-
+    <!--
     <table class="tn-detail-full-width" cellspacing="0"><tr>
       <td>
         <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('start_date')" >
@@ -48,10 +48,11 @@
         </mat-form-field> 
       </td>
     </tr></table>
+    -->
 
     <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('status')" >
       <mat-label>Status</mat-label>
-      <input matInput name="status" [(ngModel)]="tn_info.status" readonly />
+      <input matInput name="status" [value]="getStatusDisplay()" readonly />
     </mat-form-field>
   </form>
 

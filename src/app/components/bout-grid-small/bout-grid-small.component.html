@@ -2,20 +2,25 @@
   <div *ngIf="show_player_list; else players__show_round_tabs">
     <div *ngIf="tn_info.players.length > 0; else players__no_one_registered">
       <p>{{tn_info.players.length}} registered player(s):</p>
-      <table class="full-width" cellspacing="0">
-        <ng-container *ngFor="let row of (tn_info.players | splitColumns:2); index as r">
-          <tr>
-            <ng-container *ngFor="let user_id of row; index as c">
-              <td style="width:40%">
-                <div *ngIf="user_id; else players__no_one_registered">
-                  <!-- {{'(' + (r * 2 + c + 1) + ') '}} -->
-                  <div [ngClass]="getUserNameCssClasses(user_id)">{{getUserName(user_id)}}</div>
-                </div>
+      <div style="margin-bottom:30px; margin-top:20px;">
+        <table class="full-width" cellspacing="0">
+          <ng-container *ngFor="let row of (tn_info.players | splitColumns:2); index as r">
+            <tr>
+              <td width="45%" height="50px">
+                <div [ngClass]="getUserNameCssClasses(row[0])">{{getUserName(row[0])}}</div>
               </td>
-            </ng-container>
-          </tr>
-        </ng-container>
-      </table>
+              <!--
+              <td width="3%">
+                <div style="text-align:center">VS</div>
+              </td>
+              -->
+              <td width="45%">
+                <div [ngClass]="getUserNameCssClasses(row[1])">{{getUserName(row[1])}}</div>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
     </div>
     <ng-template #players__no_one_registered>
       <p>No player has registered.</p>
@@ -24,9 +29,130 @@
   <ng-template #players__show_round_tabs>
     <div [hidden]="config.hidden.includes('players')">
       <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
-        <mat-tab label="First">Content 1</mat-tab>
-        <mat-tab label="Second">Content 2</mat-tab>
-        <mat-tab label="Third">Content 3</mat-tab>
+        <div *ngIf="tn_info.size >= 16">
+          <mat-tab label="Round of 16">
+            <div style="margin-bottom:30px; margin-top:20px;">
+              <table class="full-width" cellspacing="0">
+                <ng-container *ngFor="let row of tn_info.bouts['_16']; index as r">
+                  <tr>
+                    <td width="45%" height="50px">
+                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_16', row[0])">
+                        <span *ngIf="row[2] && row[0]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[0])}}
+                      </div>
+                    </td>
+                    <td width="3%">
+                      <div style="text-align:center">VS</div>
+                    </td>
+                    <td width="45%">
+                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_16', row[1])">
+                        <span *ngIf="row[2] && row[1]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[1])}}
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
+        <div *ngIf="tn_info.size >= 8">
+          <mat-tab label="Quarter-final">
+            <div style="margin-bottom:30px; margin-top:20px;">
+              <table class="full-width" cellspacing="0">
+                <ng-container *ngFor="let row of tn_info.bouts['_8']; index as r">
+                  <tr>
+                    <td width="45%" height="50px">
+                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_8', row[0])">
+                        <span *ngIf="row[2] && row[0]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[0])}}
+                      </div>
+                    </td>
+                    <td width="3%">
+                      <div style="text-align:center">VS</div>
+                    </td>
+                    <td width="45%">
+                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_8', row[1])">
+                        <span *ngIf="row[2] && row[1]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[1])}}
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
+        <div *ngIf="tn_info.size >= 4">
+          <mat-tab label="Semi-final">
+            <div style="margin-bottom:30px; margin-top:20px;">
+              <table class="full-width" cellspacing="0">
+                <ng-container *ngFor="let row of tn_info.bouts['_4']; index as r">
+                  <tr>
+                    <td width="45%" height="50px">
+                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_4', row[0])">
+                        <span *ngIf="row[2] && row[0]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[0])}}
+                      </div>
+                    </td>
+                    <td width="3%">
+                      <div style="text-align:center">VS</div>
+                    </td>
+                    <td width="45%">
+                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_4', row[1])">
+                        <span *ngIf="row[2] && row[1]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[1])}}
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
+        <div *ngIf="tn_info.size >= 2">
+          <mat-tab label="Final">
+            <div style="margin-bottom:30px; margin-top:20px;">
+              <table class="full-width" cellspacing="0">
+                <ng-container *ngFor="let row of tn_info.bouts['_2']; index as r">
+                  <tr>
+                    <td width="45%" height="50px">
+                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_2', row[0])">
+                        <span *ngIf="row[2] && row[0]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[0])}}
+                      </div>
+                    </td>
+                    <td width="3%">
+                      <div style="text-align:center">VS</div>
+                    </td>
+                    <td width="45%">
+                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_2', row[1])">
+                        <span *ngIf="row[2] && row[1]==row[2]">
+                          <img src="/assets/images/medal.svg" height="18px">
+                        </span>
+                        {{getUserName(row[1])}}
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
       </mat-tab-group>
     </div>
   </ng-template>
