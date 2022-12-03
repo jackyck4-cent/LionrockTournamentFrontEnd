@@ -1,153 +1,33 @@
-<div class="row w-100">
-    <div class="col-3">
-      <!-- Tab navs -->
-      <div
-        class="nav flex-column nav-tabs text-center"
-        id="v-tabs-tab"
-        role="tablist"
-        aria-orientation="vertical"
-      >
-        <a
-          class="nav-link active"
-          id="v-tabs-16-tab"
-          data-mdb-toggle="tab"
-          href="/tn-detail/{{ key }}#round-of-16"
-          role="tab"
-          aria-controls="v-tabs-16"
-          aria-selected="true"
-          >Round of 16</a
-        >
-        <a
-          class="nav-link"
-          id="v-tabs-qr-tab"
-          data-mdb-toggle="tab"
-          href="/tn-detail/{{ key }}#quarter-finals"
-          role="tab"
-          aria-controls="v-tabs-qr"
-          aria-selected="false"
-          >Quarter Finals</a
-        >
-        <a
-          class="nav-link"
-          id="v-tabs-sf-tab"
-          data-mdb-toggle="tab"
-          href="/tn-detail/{{ key }}#semi-finals"
-          role="tab"
-          aria-controls="v-tabs-sf"
-          aria-selected="false"
-          >Semi Finals</a
-        >
-        <a
-          class="nav-link"
-          id="v-tabs-ff-tab"
-          data-mdb-toggle="tab"
-          href="/tn-detail/{{ key }}#finals"
-          role="tab"
-          aria-controls="v-tabs-ff"
-          aria-selected="false"
-          >Finals</a
-        >
-      </div>
-      <!-- Tab navs -->
+<div>
+  <div *ngIf="show_player_list; else players__show_round_tabs">
+    <div *ngIf="tn_info.players.length > 0; else players__no_one_registered">
+      <p>{{tn_info.players.length}} registered player(s):</p>
+      <table class="full-width" cellspacing="0">
+        <ng-container *ngFor="let row of (tn_info.players | splitColumns:2); index as r">
+          <tr>
+            <ng-container *ngFor="let user_id of row; index as c">
+              <td style="width:40%">
+                <div *ngIf="user_id; else players__no_one_registered">
+                  <!-- {{'(' + (r * 2 + c + 1) + ') '}} -->
+                  <div [ngClass]="getUserNameCssClasses(user_id)">{{getUserName(user_id)}}</div>
+                </div>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </table>
     </div>
-  
-    <div class="col-9">
-      <!-- Tab content -->
-      <div class="tab-content" id="v-tabs-tabContent">
-        <div
-          class="tab-pane fade show active"
-          id="v-tabs-16"
-          role="tabpanel"
-          aria-labelledby="v-tabs-16-tab"
-          *ngFor="let data of round_of_16"
-        >
-          <div style="padding-bottom:10px" *ngFor="let bout of data; let i = index">
-            <button mat-stroked-button>{{ data[i].player_1 }}</button>  vs <button mat-stroked-button>{{ data[i].player_2 }}</button>  status: {{ data[i].status }}
-          </div>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="v-tabs-qr"
-          role="tabpanel"
-          aria-labelledby="v-tabs-qr-tab"
-          *ngFor="let data of quarter_finals"
-        >
-          <div *ngFor="let bout of data; let i = index">
-            {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-          </div>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="v-tabs-sf"
-          role="tabpanel"
-          aria-labelledby="v-tabs-sf-tab"
-          *ngFor="let data of semi_finals"
-        >
-          <div *ngFor="let bout of data; let i = index">
-            {{ data[i].player_1 }} vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-          </div>
-        <div
-          class="tab-pane fade"
-          id="v-tabs-ff"
-          role="tabpanel"
-          aria-labelledby="v-tabs-ff-tab"
-          *ngFor="let data of final"
-        >
-          <div *ngFor="let bout of data; let i = index">
-            {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-          </div>
-        </div>
-      </div>
-      <!-- Tab content -->
-    </div>
+    <ng-template #players__no_one_registered>
+      <p>No player has registered.</p>
+    </ng-template>
   </div>
-
-<!--
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Round of 16</a>
-      <div class="container text-center" *ngFor="let data of round_of_16">
-        <div *ngFor="let bout of data; let i = index">
-          {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-        </div>
-      </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Quarter Finals</a>
-      <div class="container text-center" *ngFor="let data of quarter_finals">
-        <div *ngFor="let bout of data; let i = index">
-          {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-        </div>
-      </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Semi Finals</a>
-      <div class="container text-center" *ngFor="let data of semi_finals">
-        <div *ngFor="let bout of data; let i = index">
-          {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-        </div>
-      </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Final</a>
-       <div class="container text-center" *ngFor="let data of final">
-        <div *ngFor="let bout of data; let i = index">
-          {{ data[i].player_1 }}  vs {{ data[i].player_2 }}  status:{{ data[i].status }}
-        </div>
-      </div>
-  </li>
-</ul>
-
-
-       
-
-<table>
-    <span *ngFor="let obj of data">{{obj.player_1}}</span></div>
-  <tr *ngFor="let bout of dataSource">
-    <td *ngFor="let obj of bout">{{obj.player_1}}</td>
-    <td>vs</td>
-    <td *ngFor="let obj of bout">{{obj.player_2}}</td>
-    <td>status</td>
-    <td *ngFor="let obj of bout">{{obj.status}}</td>
-  </tr>
-</table>-->
+  <ng-template #players__show_round_tabs>
+    <div [hidden]="config.hidden.includes('players')">
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+        <mat-tab label="First">Content 1</mat-tab>
+        <mat-tab label="Second">Content 2</mat-tab>
+        <mat-tab label="Third">Content 3</mat-tab>
+      </mat-tab-group>
+    </div>
+  </ng-template>
+</div>

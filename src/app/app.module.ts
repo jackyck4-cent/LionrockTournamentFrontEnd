@@ -33,7 +33,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
+import { SplitColumnsPipe } from './split-columns.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import {MatDividerModule} from '@angular/material/divider';
     TnDetailComponent,
     TnManagePageComponent,
     TnCreatePageComponent,
+    SplitColumnsPipe,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatRadioModule,
     MatFormFieldModule,
     MatDividerModule,
+    MatTabsModule,
+    MatListModule,
   ],
   providers: [
     {

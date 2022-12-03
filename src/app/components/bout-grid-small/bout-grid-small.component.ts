@@ -1,59 +1,43 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
-import { DUMMY_16BOUTS_INFOS_ARRAY } from 'src/app/shared/dummy_bouts_data';
-import { DUMMY_QUARTER_FINALS_INFOS_ARRAY } from 'src/app/shared/dummy_bouts_data';
-import { DUMMY_SEMI_FINALS_ARRAY } from 'src/app/shared/dummy_bouts_data';
-import { DUMMY_FINAL_ARRAY } from 'src/app/shared/dummy_bouts_data';
-//import { BoutsInfo } from 'src/app/shared/BoutsInfo';
-import {DUMMY_TN_INFOS} from '../../shared/dummy_data'
-
-//let dummy_bouts_infos = Array.from(DUMMY_BOUTS_INFOS.values());
-let dummy_16bouts_infos = DUMMY_16BOUTS_INFOS_ARRAY;
-let dummy_quarter_infos = DUMMY_QUARTER_FINALS_INFOS_ARRAY;
-let dummy_semi_infos = DUMMY_SEMI_FINALS_ARRAY;
-let dummy_final_infos = DUMMY_FINAL_ARRAY;
+import { Component, OnInit, Input } from '@angular/core';
+import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { PlayerInfo } from 'src/app/shared/player_info';
+import { TnInfo } from 'src/app/shared/tn_info';
+import { DisplayConfig } from 'src/app/shared/displayconfig';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-bout-grid-small',
   templateUrl: './bout-grid-small.component.html',
   styleUrls: ['./bout-grid-small.component.scss']
 })
-export class BoutGridSmallComponent implements OnInit, AfterViewInit {
+export class BoutGridSmallComponent implements OnInit {
 
-  //displayedColumns: string[] = ['tn_id', 'round_id', 'match_id', 'player_1', 'player_2', 'score_1', 'score_2', 'winner', 'status'];
-  //displayedColumns: string[] = ['name', 'owner', 'start_date', 'end_date', 'status'];
-  //dataSource = new MatTableDataSource(dummy_bouts_infos);
+  @Input()
+  config!: DisplayConfig;
 
-  //dataSource!: BoutsInfo;
-  round_of_16 = new Array(dummy_16bouts_infos);
-  quarter_finals = new Array(dummy_quarter_infos);
-  semi_finals = new Array(dummy_semi_infos);
-  final = new Array(dummy_final_infos);
+  @Input() 
+  tn_id!: string;
 
-  @Input() key = '';
+  @Input() 
+  show_player_list!: boolean;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+  tn_info!: TnInfo;
+  players_info!: Map<string, PlayerInfo>;
+  datasource_bouts!: MatTableDataSource<TnInfo>;
+
+  constructor(private backend: DummyBackendService) { }
 
   ngOnInit(): void {
+    console.log(`bout-grid-small: tn_id=${this.tn_id}`);
+    [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
+    console.log(this.tn_info);
   }
 
-  @ViewChild(MatSort) sort!: MatSort;
-
-  ngAfterViewInit() {
-//    this.dataSource.sort = this.sort;
+  getUserName(user_id: string): string {
+    return this.players_info.get(user_id)?.name || '<unknown-user>';
   }
 
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
+  getUserNameCssClasses(user_id: string): string {
+    return `username ${user_id == 'a0001' ? 'username-self': ''}`;
   }
 }

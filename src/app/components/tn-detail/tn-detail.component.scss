@@ -17,3 +17,8 @@
   margin-right: 10px;
   margin-bottom: 8px;
 }
+
+input:read-write {
+  font-weight: bold;
+  color: indigo;
+}
