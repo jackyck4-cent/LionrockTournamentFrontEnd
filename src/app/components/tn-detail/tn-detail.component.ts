@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DummyBackendService } from 'src/app/services/dummy-backend.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
@@ -20,7 +20,7 @@ export class TnDetailComponent implements OnInit {
   private players_info!: Map<string, PlayerInfo>;
   tn_info!: TnInfo;
 
-  constructor(private route: ActivatedRoute, private backend: DummyBackendService) {
+  constructor(private route: ActivatedRoute, private backend: BackendService) {
   }
 
   ngOnInit(): void {

@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { DUMMYDATA } from '../shared/dummy_all_data';
 import { PlayerInfo } from '../shared/player_info';
 import { TnInfo } from '../shared/tn_info';
+import { BackendInterface } from './backend-interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DummyBackendService {
+
+export class DummyBackendService implements BackendInterface {
   backend_name: string;
   private all_players!: Map<string, PlayerInfo>;
   private all_tn_infos!: any; //Map<string, TnInfo>;
@@ -40,17 +42,7 @@ export class DummyBackendService {
     return `${this.next_tn_id++}`;
   }
 
-  getTnList(ids?: string[]): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
-    if (ids) {
-      let new_tn_infos = new Map<string, TnInfo>();
-      for (let _id of ids) {
-        if (this.all_tn_infos.has(_id)) {
-          new_tn_infos.set(_id, this.all_tn_infos.get(_id)!);
-        }
-      }
-      console.log(`Get tournament(s), total ${new_tn_infos.size}`);
-      return [this.all_players, new_tn_infos];
-    }
+  getTnList(): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
     console.log(`Get tournaments, total ${this.all_tn_infos.size}`);
     return [this.all_players, this.all_tn_infos];
   }
