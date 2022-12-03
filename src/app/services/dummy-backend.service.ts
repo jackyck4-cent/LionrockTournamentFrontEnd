@@ -11,8 +11,11 @@ import { BackendInterface } from './backend-interface';
 export class DummyBackendService implements BackendInterface {
   backend_name: string;
   private all_players!: Map<string, PlayerInfo>;
-  private all_tn_infos!: any; //Map<string, TnInfo>;
+  private all_tn_infos!: Map<string, TnInfo>;
   private next_tn_id: number = 0;
+
+  // TODO: Temporary set my user id here, must change later
+  private my_user_id: string = 'a0001';
 
   constructor() {
     this.backend_name = 'Dummy Backend';
@@ -24,6 +27,14 @@ export class DummyBackendService implements BackendInterface {
       let tn = Object.assign(new TnInfo(), v);
       this.all_tn_infos.set(k, tn);
     }
+  }
+
+  getMyUserId(): string {
+    return this.my_user_id;
+  }
+
+  getMyUserName(): string {
+    return this.all_players.get(this.my_user_id)?.name ?? '';
   }
 
   private getUniqueTnId(): string {
@@ -42,9 +53,43 @@ export class DummyBackendService implements BackendInterface {
     return `${this.next_tn_id++}`;
   }
 
-  getTnList(): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
-    console.log(`Get tournaments, total ${this.all_tn_infos.size}`);
-    return [this.all_players, this.all_tn_infos];
+  getTnList(filters: string[]): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
+    let tn_infos = new Map<string, TnInfo>();
+    this.all_tn_infos.forEach((tn_info: TnInfo, tn_id: string) => {
+      let hit = false;
+      if (filters.includes('all')) {
+        hit = true;
+      } else {
+        filters.forEach((ft) => {
+          if (!hit) {
+            switch (ft) {
+              case 'registered':
+                hit = (tn_info.players.includes(this.getMyUserId()));
+                break;
+              case 'owned':
+                hit = (tn_info.owner == this.getMyUserId());
+                break;
+              case 'enrolling':
+                hit = (tn_info.status == 'enrolling');
+                break;
+              case 'started':
+                hit = (tn_info.status == 'started');
+                break;
+              case 'completed':
+                hit = (tn_info.status == 'completed');
+                break;
+              case 'draft':
+                hit = (tn_info.status == 'draft');
+                break;
+            }
+          }
+        });
+      }
+      if (hit) {
+        tn_infos.set(tn_id, tn_info);
+      }
+    });
+    return [this.all_players, tn_infos];
   }
 
   getTn(id: string): [Map<string, PlayerInfo>, TnInfo] {

@@ -38,7 +38,7 @@ export class BoutGridSmallComponent implements OnInit {
 
   getUserNameCssClasses(user_id: string): string {
     // TODO: temporary use 'a0001' for current user, need to change here
-    return `username ${user_id == 'a0001' ? 'username-self': (user_id ? '': 'username-empty')}`;
+    return `username ${user_id == this.backend.getMyUserId() ? 'username-self': (user_id ? '': 'username-empty')}`;
   }
 
   onClick(round: string, user_id: string): void {

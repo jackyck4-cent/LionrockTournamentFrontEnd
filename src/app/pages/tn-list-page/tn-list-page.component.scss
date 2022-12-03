@@ -2,7 +2,16 @@
     display: table-cell;
     max-width: 600px;
 }
-  
-.button-row .mat-mdc-button-base {
-margin: 8px 8px 8px 0;
+
+.toggle-buttons {
+    color: black;
+    margin: 0px 5px;
+    border-radius: 18px;
+    padding: 2px 2px;
+}
+// .toggle-buttons:hover {
+//     background-color: green;
+// }
+.toggle-buttons:checked {
+    background-color: red;
 }

@@ -7,14 +7,20 @@ import { DummyBackendService } from './dummy-backend.service';
 @Injectable({
   providedIn: 'root'
 })
-export class BackendService implements BackendInterface {
+export class BackendService {
 
-  private backend: DummyBackendService = new DummyBackendService();
+  private backend: BackendInterface = new DummyBackendService();
 
   constructor() { }
 
-  getTnList(): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
-    return this.backend.getTnList();
+  getMyUserId(): string {
+    return this.backend.getMyUserId();
+  }
+  getMyUserName(): string {
+    return this.backend.getMyUserName();
+  }
+  getTnList(filters: string[]): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
+    return this.backend.getTnList(filters);
   }
   getTn(id: string): [Map<string, PlayerInfo>, TnInfo] {
     return this.backend.getTn(id);

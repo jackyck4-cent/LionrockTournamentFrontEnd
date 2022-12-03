@@ -37,6 +37,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTabsModule,
     MatListModule,
     MatDatepickerModule,
+    MatChipsModule,
   ],
   providers: [
     {

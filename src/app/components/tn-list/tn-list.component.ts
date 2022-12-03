@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
+import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
 
 // let dummy_tn_infos = Array.from(DUMMY_TN_INFOS.values());
 
@@ -17,16 +18,23 @@ export class TnListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['name', 'owner', 'start_date', 'end_date', 'status'];
   dataSource!: MatTableDataSource<TnInfo>;
-  private all_players_info: Map<string, PlayerInfo>;
-  private all_tn_info: Map<string, TnInfo>;
+  private all_players_info!: Map<string, PlayerInfo>;
+  private all_tn_info!: Map<string, TnInfo>;
 
-  constructor(private backend: BackendService, private _liveAnnouncer: LiveAnnouncer) { 
-    [this.all_players_info, this.all_tn_info] = this.backend.getTnList();
-    this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+  constructor(private backend: BackendService, 
+    private filterService: TnListFilterServiceService,
+    private _liveAnnouncer: LiveAnnouncer) { 
   }
 
   ngOnInit(): void {
-    this.backend.getTnList();
+    // [this.all_players_info, this.all_tn_info] = this.backend.getTnList(['all']);
+    // this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+    this.filterService.filterHasChanged().subscribe((filters: string[]) => {
+      // this.filters = filters;
+      [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters);
+      this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+    });
+    this.filterService.change(['all']);
   }
 
   @ViewChild(MatSort) sort!: MatSort; 
@@ -65,10 +73,10 @@ export class TnListComponent implements OnInit, AfterViewInit {
         
       case 'started':
         switch (tn_info.current_round) {
-          case '2': return 'Final';
-          case '4': return 'Semi-final';
-          case '8': return 'Quarter-final';
-          case '16': return 'Round of 16';
+          case '_2': return 'Final';
+          case '_4': return 'Semi-final';
+          case '_8': return 'Quarter-final';
+          case '_16': return 'Round of 16';
         }
         return '';
       case 'completed':
