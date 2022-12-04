@@ -6,7 +6,8 @@ export interface BackendInterface {
     getMyUserName(): string;
     getTnList(filters: string[]): [Map<string, PlayerInfo>, Map<string, TnInfo>];
     getTn(id: string): [Map<string, PlayerInfo>, TnInfo];
+    registerTn(tn_id: string, user_id: string): boolean;
     createTn(tn_info: TnInfo): string;
-    updateTn(tn_info: TnInfo): void;
-    deleteTn(tn_id: string): void;
+    updateTn(tn_info: TnInfo): boolean;
+    deleteTn(tn_id: string): boolean;
 }

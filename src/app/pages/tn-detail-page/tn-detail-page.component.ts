@@ -38,11 +38,29 @@ export class TnDetailPageComponent implements OnInit {
     }
   }
 
-  onButton(btn: string) {
-    console.log(`Clicked "${btn}" button`);
+  isHiddenButton(btn: string): boolean {
+    if (btn == 'manage') {
+      if (this.backend.getMyUserId() == this.tn_info.owner) {
+        return true;
+      }
+    } else if (btn == 'register') {
+      if (this.tn_info.status == 'enrolling' && !this.tn_info.players.includes(this.backend.getMyUserId())) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
-  isHiddenButton(btn: string): boolean {
-    return true;
+  onButton(btn: string) {
+    console.log(`Clicked "${btn}" button`);
+    if (btn == 'register') {
+      this.backend.registerTn(this.tn_id, this.backend.getMyUserId());
+      // TODO: refresh the page
+
+    } else if (btn == 'manage') {
+      console.log('Go to tn-manage-page');
+      // TODO: add code here
+    }
   }
 }

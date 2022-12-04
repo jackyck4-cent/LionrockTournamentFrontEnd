@@ -132,7 +132,7 @@ export var DUMMYDATA = {
       start_date: '2022-11-21',
       end_date: '2022-11-28',
       status: 'enrolling',
-      players: ['a0001', 'a0002', 'a0003', 'a0004', 'a0005', 'a0006'],  // list of players
+      players: ['a0013', 'a0002', 'a0003', 'a0004', 'a0005'],  // list of players
       current_round: '',    // 1=completed, 2=final, 4=semi-final, 8=quarter-final, 16=round-of-16
       champion: '',
       bouts: {

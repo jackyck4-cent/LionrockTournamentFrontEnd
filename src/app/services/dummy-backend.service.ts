@@ -97,6 +97,20 @@ export class DummyBackendService implements BackendInterface {
     return [this.all_players, this.all_tn_infos.get(id) ?? new TnInfo()];
   }
 
+  registerTn(tn_id: string, user_id: string): boolean {
+    console.log(`Register user ${user_id} to tournament ${tn_id}`);
+    if (this.all_tn_infos.has(tn_id)) {
+      let tn_info = this.all_tn_infos.get(tn_id);
+      if (tn_info && tn_info.status == 'enrolling') {
+        if (tn_info.players.length < tn_info.size) {
+          tn_info.players.push(user_id);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   createTn(tn_info: TnInfo): string {
     tn_info.tn_id = this.getUniqueTnId();
     this.all_tn_infos.set(tn_info.tn_id, tn_info);
@@ -104,17 +118,21 @@ export class DummyBackendService implements BackendInterface {
     return tn_info.tn_id;
   }
 
-  updateTn(tn_info: TnInfo): void {
+  updateTn(tn_info: TnInfo): boolean {
     if (tn_info.tn_id && this.all_tn_infos.has(tn_info.tn_id)) {
       this.all_tn_infos.set(tn_info.tn_id, tn_info);
       console.log(`Updated tournament with id ${tn_info.tn_id}`);
+      return true;
     }
+    return false;
   }
 
-  deleteTn(tn_id: string): void {
+  deleteTn(tn_id: string): boolean {
     if (this.all_tn_infos.has(tn_id)) {
       this.all_tn_infos.delete(tn_id);
       console.log(`Deleted tournament with id ${tn_id}`);
+      return true;
     }
+    return false;
   }
 }

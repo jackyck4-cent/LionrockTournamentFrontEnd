@@ -25,13 +25,16 @@ export class BackendService {
   getTn(id: string): [Map<string, PlayerInfo>, TnInfo] {
     return this.backend.getTn(id);
   }
+  registerTn(tn_id: string, user_id: string): boolean {
+    return this.backend.registerTn(tn_id, user_id);
+  }
   createTn(tn_info: TnInfo): string {
     return this.backend.createTn(tn_info);
   }
-  updateTn(tn_info: TnInfo): void {
+  updateTn(tn_info: TnInfo): boolean {
     return this.backend.updateTn(tn_info);
   }
-  deleteTn(tn_id: string): void {
+  deleteTn(tn_id: string): boolean {
     return this.backend.deleteTn(tn_id);
   }
 }
