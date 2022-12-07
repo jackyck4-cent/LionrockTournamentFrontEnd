@@ -23,18 +23,28 @@ export class TnDetailPageComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private route: ActivatedRoute, private backend: BackendService) { }
+  constructor(private route: ActivatedRoute, private backend: BackendService , private router:Router ) { }
 
   ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     console.log(`tn-detail-page: tn_id=${this.tn_id}`);
+
+    /* 
+    Jacky
+    Api to get info , owner have more power
+    register the game
+    register list
+    result
+    tree
+    */
     [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
 
     console.log(this.tn_info);
     if (Object.keys(this.tn_info).length == 0) {
       // if no tournament is found, redirect the page to tn-list
       //   this code is dirty, user will see an empty detail page before redirection
-      window.location.href = '/tn-list';
+      //window.location.href = '/tn-list';
+      this.router.navigate(["tn-list"]);
     }
   }
 

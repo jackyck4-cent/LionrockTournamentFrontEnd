@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  /* 
+  Jacky
+  change that to welcome page
+  make those links to nav
+  */
   constructor() { }
 
   ngOnInit(): void {

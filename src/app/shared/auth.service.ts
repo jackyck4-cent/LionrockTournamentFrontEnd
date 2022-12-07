@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { User } from "./user";
+import { endpoint } from "./endpoint";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import {
@@ -13,7 +14,7 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class AuthService {
-  endpoint: string = "http://localhost:3000";
+  endpoint: string = endpoint.url;
   headers = new HttpHeaders().set("Content-Type", "application/json");
   currentUser = {};
 
@@ -51,6 +52,10 @@ export class AuthService {
         
         if (res.status == 1 )
         {
+          /*
+          Jacky
+          Provide display name, reference for interface
+          */
           localStorage.setItem("access_token", res.token);
           /*
           this.getUserProfile(res._id).subscribe((res) => {

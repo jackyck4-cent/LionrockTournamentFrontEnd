@@ -2,7 +2,7 @@
   <div class="page-title">Tournaments</div>
 
   <div class="button-row">
-    <mat-button-toggle-group name="tn-list-filters" multiple>
+    <mat-button-toggle-group name="tn-list-filters" multiple *ngIf="this.authService.isLoggedIn">
       <mat-button-toggle class="toggle-buttons" [checked]="opt_registered" (change)="toggleFilter('registered')">My Tournaments</mat-button-toggle>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_owned" (change)="toggleFilter('owned')">Owned</mat-button-toggle>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_enrolling" (change)="toggleFilter('enrolling')">Enrolling</mat-button-toggle>
@@ -10,10 +10,19 @@
       <mat-button-toggle class="toggle-buttons" [checked]="opt_completed" (change)="toggleFilter('completed')">Completed</mat-button-toggle>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_draft" (change)="toggleFilter('draft')">Draft</mat-button-toggle>
     </mat-button-toggle-group>
-  </div>
+  </div> 
   <br>
   <!-- <button mat-raised-button color="accent" (click)="onTestButton()">Test: print tn_info</button> -->
-  <div>Who am I?  ({{getMyUserId()}})  {{getMyUserName()}}</div>
+  <div *ngIf="this.authService.isLoggedIn" >Who am I?  {{this.currentUser.display_name}} <!--({{getMyUserId()}})  {{getMyUserName()}}--></div>
   <br>
+  <div *ngIf="this.authService.isLoggedIn">
+    <a
+      
+      class="p-2 text-dark"
+      routerLink="/tn-create">
+      New Tournaments</a>
+  </div>
+  <br />
+  <div></div>
   <app-tn-list></app-tn-list>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DUMMY_TN_INFOS } from 'src/app/shared/dummy_data';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
@@ -24,14 +24,23 @@ export class TnManagePageComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private route: ActivatedRoute, backend: BackendService) {
+  /*
+  Jacky 
+  change to api
+  status change
+  result update
+  
+  */
+
+  constructor(private route: ActivatedRoute, backend: BackendService, router: Router) {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     [this.players_info, this.tn_info] = backend.getTn(this.tn_id)
     console.log(this.tn_info);
     if (Object.keys(this.tn_info).length == 0) {
       // if no tournament is found, redirect the page to tn-list
       //   this code is dirty, user will see an empty detail page before redirection
-      window.location.href = '/tn-list';
+      //window.location.href = '/tn-list';
+      router.navigate(["tn-list"]);
     }
   }
 

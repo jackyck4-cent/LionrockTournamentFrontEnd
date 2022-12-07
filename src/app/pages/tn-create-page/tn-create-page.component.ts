@@ -25,13 +25,21 @@ export class TnCreatePageComponent implements OnInit {
   players_info!: Map<string, PlayerInfo>;
 
   constructor(private route: ActivatedRoute, private backend: BackendService) {
+
+    /*
+    Jacky 
+    Implement logic here 
+    if id not provided => create new tournment
+    If id provided => check existance and modity tournment
+    */
+   
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     [this.players_info, this.tn_info] = backend.getTn(this.tn_id)
     console.log(this.tn_info);
     if (Object.keys(this.tn_info).length == 0) {
       // if no tournament is found, redirect the page to tn-list
       //   this code is dirty, user will see an empty detail page before redirection
-      window.location.href = '/tn-list';
+    //  window.location.href = '/tn-list';
     }
   }
 

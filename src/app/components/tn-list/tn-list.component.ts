@@ -6,9 +6,9 @@ import { TnInfo } from 'src/app/shared/tn_info';
 import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
-
+import { ApibackendService } from '../../services/apibackend.service';
 // let dummy_tn_infos = Array.from(DUMMY_TN_INFOS.values());
-
+ 
 @Component({
   selector: 'app-tn-list',
   templateUrl: './tn-list.component.html',
@@ -20,10 +20,12 @@ export class TnListComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<TnInfo>;
   private all_players_info!: Map<string, PlayerInfo>;
   private all_tn_info!: Map<string, TnInfo>;
-
+ 
   constructor(private backend: BackendService, 
     private filterService: TnListFilterServiceService,
-    private _liveAnnouncer: LiveAnnouncer) { 
+    private _liveAnnouncer: LiveAnnouncer,
+    private apibackend:ApibackendService
+    ) { 
   }
 
   ngOnInit(): void {
@@ -31,8 +33,31 @@ export class TnListComponent implements OnInit, AfterViewInit {
     // this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
     this.filterService.filterHasChanged().subscribe((filters: string[]) => {
       // this.filters = filters;
-      [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters);
-      this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+      
+      [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters)
+      console.log(this.all_players_info);
+
+      /*
+      Jacky
+      Change to ajax call also provide token
+      if it is logged user , tab menu exist for filtering
+      if it is non-logged , disaply only publish tournment
+      */
+      this.apibackend.getTnFullList(filters).subscribe(
+        (res) => {
+          //console.log(res);
+          if (res.status == 1 )
+          {
+            this.all_players_info = new Map(Object.entries(res.data.players))
+            this.all_tn_info = new Map(Object.entries(res.data.tournaments));
+            this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+            this.dataSource.sort = this.sort;
+          }
+            
+        }
+      );
+
+      
     });
     this.filterService.change(['all']);
   }
@@ -40,7 +65,7 @@ export class TnListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort; 
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    
   }
 
   announceSortChange(sortState: Sort) {

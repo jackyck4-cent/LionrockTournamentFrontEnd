@@ -4,7 +4,16 @@
   <h5 class="my-0 mr-md-auto font-weight-normal" routerLink="/" >Logo</h5>
   <nav class="my-2 my-md-0 mr-md-3">
 
-    <a *ngIf="this.authService.isLoggedIn" class="p-2 text-dark">User Profile</a>
+    <a *ngIf="this.authService.isLoggedIn"
+      routerLink = "/profile"
+    class="p-2 text-dark">User Profile</a>
+
+    <a
+      
+      class="p-2 text-dark"
+      routerLink="/tn-list">
+      Tournment
+    </a>
 
     <a
       *ngIf="!this.authService.isLoggedIn"
@@ -12,7 +21,7 @@
       routerLinkActive="active"
       routerLink="/log-in">
       Sign in
-    </a>
+    </a>   
 
     <a
       *ngIf="!this.authService.isLoggedIn"
@@ -22,6 +31,7 @@
       routerLink="/sign-up">
       Sign up
     </a>
+    
     <button
         (click)="logout()"
         *ngIf="this.authService.isLoggedIn"

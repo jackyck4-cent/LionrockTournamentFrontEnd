@@ -43,9 +43,10 @@ const routes: Routes = [
   ],
 },
   { path: 'tn-create',
+    component: TnCreatePageComponent,
   children: [
     { path: ':id', component: TnCreatePageComponent },
-    { path: '**', redirectTo: '/tn-list' },
+   // { path: '**', redirectTo: '/tn-list' },
   ],
 },
 

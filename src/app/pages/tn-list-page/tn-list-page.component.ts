@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
+import { AuthService } from "../../shared/auth.service";
 
 @Component({
   selector: 'app-tn-list-page',
   templateUrl: './tn-list-page.component.html',
   styleUrls: ['./tn-list-page.component.scss']
-})
+}) 
 export class TnListPageComponent implements OnInit {
-
+  currentUser: any = {};
+  
   opt_registered: boolean = true;
   opt_owned: boolean = true;
   opt_enrolling: boolean = true;
@@ -17,7 +19,15 @@ export class TnListPageComponent implements OnInit {
   opt_draft: boolean = true;
 
   constructor(private filterService: TnListFilterServiceService,
-    private backend: BackendService) { }
+    private backend: BackendService,
+    public authService: AuthService) { 
+
+      this.authService.getMe().subscribe((res) => {
+        //console.log(res);
+        if (res.status == 1 )
+          this.currentUser = res.info;
+      });
+    } 
 
   ngOnInit(): void {
   }

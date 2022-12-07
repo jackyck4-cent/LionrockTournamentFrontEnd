@@ -35,6 +35,14 @@ export class SignupComponent implements OnInit {
         alert("Registeration complete");
         this.router.navigate(['log-in']);
       }
+      else if (res.status == 2)
+      {
+        alert("User already exist");
+      }
+      else 
+      {
+        alert("Invalid input");
+      }
     });
   }
 }
