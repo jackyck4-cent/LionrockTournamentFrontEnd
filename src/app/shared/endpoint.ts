@@ -1,3 +1,3 @@
 export const endpoint = {
-    url: "http://localhost:3000"
+    url: "https://lionrock-com229.herokuapp.com"
 };
