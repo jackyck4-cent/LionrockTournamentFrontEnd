@@ -117,7 +117,7 @@ export class TnManagePageComponent implements OnInit {
     if (this.tn_info) {
       switch (btn) {
         case 'start_enrolling':
-          this.backend.enrollTn(this.tn_id).subscribe((res) => {
+          this.backend.enrollnow(this.tn_id).subscribe((res) => {
             if (res.status == 1) {
               this.reloadComponent();
             } else {
