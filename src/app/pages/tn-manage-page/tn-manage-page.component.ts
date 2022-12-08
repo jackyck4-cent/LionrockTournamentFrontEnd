@@ -15,7 +15,7 @@ import { ApibackendService } from 'src/app/services/apibackend.service';
 export class TnManagePageComponent implements OnInit {
   tn_detail__displayconfig: DisplayConfig = <DisplayConfig> {
     hidden: [],
-    readonly: ['name'],
+    readonly: ['name', 'description', 'size'],
   };
 
   @Input()
@@ -126,19 +126,20 @@ export class TnManagePageComponent implements OnInit {
           });
           break;
         case 'start_game':
-          alert(`Not yet implemented: ${btn}`);
+          alert(`Not yet implemented: "${btn}" button`);
           break;
         case 'set_winners':
-          alert(`Not yet implemented: ${btn}`);
+          alert(`Not yet implemented: "${btn}" button`);
           break;
         case 'next_round':
-          alert(`Not yet implemented: ${btn}`);
+          alert(`Not yet implemented: "${btn}" button`);
           break;
         case 'modify':
-          alert(`Not yet implemented: ${btn}`);
+          // this.router.navigate([`tn-create/${this.tn_id}`])
+          alert(`Not yet implemented: "${btn}" button`);
           break;
         case 'delete':
-          alert(`Not yet implemented: ${btn}`);
+          alert(`Not yet implemented: "${btn}" button`);
           break;
       }
     }
