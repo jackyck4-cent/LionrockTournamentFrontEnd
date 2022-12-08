@@ -57,6 +57,10 @@ export class AuthService {
           Provide display name, reference for interface
           */
           localStorage.setItem("access_token", res.token);
+
+          localStorage.setItem("display_name", res.user.display_name);
+          localStorage.setItem("role", res.user.role);
+          localStorage.setItem("userid", res.user.user_id);
           /*
           this.getUserProfile(res._id).subscribe((res) => {
             this.currentUser = res;

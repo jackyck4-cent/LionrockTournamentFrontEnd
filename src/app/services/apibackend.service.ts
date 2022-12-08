@@ -81,6 +81,19 @@ export class ApibackendService {
     );
   }
 
+  getTn(tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/info/`+tn_id;
+   
+  //  alert(api);
+    return this.http.get(api, this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   
 
   

@@ -14,10 +14,18 @@ export class BackendService {
   constructor() { }
 
   getMyUserId(): string {
-    return this.backend.getMyUserId();
+    let userid = localStorage.getItem("userid");
+    if (userid != null)
+      return userid;
+    else
+      return "";
   }
   getMyUserName(): string {
-    return this.backend.getMyUserName();
+    let display_name = localStorage.getItem("display_name");
+    if (display_name != null)
+      return display_name;
+    else
+      return "";
   }
   getTnList(filters: string[]): [Map<string, PlayerInfo>, Map<string, TnInfo>] {
     return this.backend.getTnList(filters);

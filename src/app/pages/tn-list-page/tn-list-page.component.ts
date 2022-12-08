@@ -22,11 +22,7 @@ export class TnListPageComponent implements OnInit {
     private backend: BackendService,
     public authService: AuthService) { 
 
-      this.authService.getMe().subscribe((res) => {
-        //console.log(res);
-        if (res.status == 1 )
-          this.currentUser = res.info;
-      });
+     
     } 
 
   ngOnInit(): void {
