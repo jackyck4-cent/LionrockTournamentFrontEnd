@@ -69,26 +69,43 @@ export class TnDetailPageComponent implements OnInit {
   isHiddenButton(btn: string): boolean {
     if (btn == 'manage') {
       if (this.tn_info && this.backend.getMyUserId() == this.tn_info.owner) {
-        return true;
+        return false;
       }
     } else if (btn == 'register') {
-      if (this.tn_info && this.tn_info.status == 'enrolling' && !this.tn_info.players.includes(this.backend.getMyUserId())) {
-        return true;
+      if (this.backend.getMyUserId()
+          && this.tn_info
+          && this.tn_info.status == 'enrolling'
+          && !this.tn_info.players.includes(this.backend.getMyUserId())) {
+        return false;
       }
     }
+    return true;
+  }
 
-    return false;
+  private reloadComponent() {
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
   onButton(btn: string) {
     console.log(`Clicked "${btn}" button`);
     if (btn == 'register') {
-      this.backend.registerTn(this.tn_id);
-      // TODO: refresh the page
+      this.backend.registerTn(this.tn_id).subscribe((res) => {
+        if (res.status == 1) {
+          //this.tn_info.players = res.data.players;
+          //this.router.navigate([])
+          this.reloadComponent();
+      
+        } else {
+          alert(`Failed to register to the tournament: status=${res.status}`);
+        }
+      });
 
     } else if (btn == 'manage') {
       console.log('Go to tn-manage-page');
-      // TODO: add code here
+      this.router.navigate([`tn-manage/${this.tn_id}`]);
     }
   }
 }

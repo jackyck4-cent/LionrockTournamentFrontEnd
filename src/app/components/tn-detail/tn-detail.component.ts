@@ -22,7 +22,8 @@ export class TnDetailComponent implements OnInit {
 
   players_info = new Map<string, PlayerInfo>();
 
-  constructor(private route: ActivatedRoute, private backend: ApibackendService) {
+  constructor(private route: ActivatedRoute, 
+      private backend: ApibackendService) {
   }
 
   ngOnInit(): void {

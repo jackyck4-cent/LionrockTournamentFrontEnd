@@ -12,7 +12,7 @@
           mat-raised-button
           color="primary"
           (click)="onButton('register')"
-          [hidden]="!isHiddenButton('register')">
+          [hidden]="isHiddenButton('register')">
         Register to this tournament
       </button>
 
@@ -20,7 +20,7 @@
           mat-raised-button
           color="primary"
           (click)="onButton('manage')"
-          [hidden]="!isHiddenButton('manage')">
+          [hidden]="isHiddenButton('manage')">
         Manage
       </button>
   
