@@ -37,6 +37,21 @@ export class ApibackendService {
   {
   } 
 
+  getMyUserId(): string {
+    let userid = localStorage.getItem("userid");
+    if (userid != null)
+      return userid;
+    else
+      return "";
+  }
+  getMyUserName(): string {
+    let display_name = localStorage.getItem("display_name");
+    if (display_name != null)
+      return display_name;
+    else
+      return "";
+  }
+
   private loadToken(): void
   {
     const token = localStorage.getItem('id_token');
@@ -85,8 +100,8 @@ export class ApibackendService {
   // return: latest tn_info
   createTn(tn_info: TnInfo): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/?????`;
-    return this.http.get(api, this.httpOptions ).pipe(
+    let api = `${this.endpoint}/tournments2/create`;
+    return this.http.post(api, tn_info , this.httpOptions ).pipe(
       map((res) => {
         return res || {};
       }),
@@ -99,8 +114,8 @@ export class ApibackendService {
   // return: latest tn_info
   registerTn(tn_id: string): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/?????`;
-    return this.http.get(api, this.httpOptions ).pipe(
+    let api = `${this.endpoint}/tournments2/register/`+tn_id;
+    return this.http.get(api , this.httpOptions ).pipe(
       map((res) => {
         return res || {};
       }),
@@ -113,7 +128,7 @@ export class ApibackendService {
   // return: latest tn_info
   startTn(tn_id: string): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/?????`;
+    let api = `${this.endpoint}/tournments2/start/`+tn_id;
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {
         return res || {};
@@ -129,8 +144,8 @@ export class ApibackendService {
   //     if the current round is "final", set status to "completed" and the winner to "champion"
   setRoundWinners(tn_id: string, winners: string[]): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/?????`;
-    return this.http.get(api, this.httpOptions ).pipe(
+    let api = `${this.endpoint}/tournments2/winner/`+tn_id;
+    return this.http.post(api, { 'winners' : winners }  , this.httpOptions ).pipe(
       map((res) => {
         return res || {};
       }),
@@ -146,7 +161,7 @@ export class ApibackendService {
   // return: latest tn_info
   goNextRoundTn(tn_id: string): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/?????`;
+    let api = `${this.endpoint}/tournments2/nextround/`+tn_id;
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {
         return res || {};
@@ -156,7 +171,18 @@ export class ApibackendService {
   }
 
 
-  
+  getTn(tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/info/`+tn_id;
+   
+  //  alert(api);
+    return this.http.get(api, this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
 
   // Error
   handleError(error: HttpErrorResponse) {
