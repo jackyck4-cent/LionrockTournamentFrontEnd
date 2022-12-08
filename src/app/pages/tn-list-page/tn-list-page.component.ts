@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from 'src/app/services/backend.service';
+import { ApibackendService } from 'src/app/services/apibackend.service';
 import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
 import { AuthService } from "../../shared/auth.service";
 
@@ -19,7 +19,7 @@ export class TnListPageComponent implements OnInit {
   opt_draft: boolean = true;
 
   constructor(private filterService: TnListFilterServiceService,
-    private backend: BackendService,
+    private backend: ApibackendService,
     public authService: AuthService) { 
 
       this.authService.getMe().subscribe((res) => {
@@ -30,14 +30,6 @@ export class TnListPageComponent implements OnInit {
     } 
 
   ngOnInit(): void {
-  }
-
-  getMyUserId(): string {
-    return this.backend.getMyUserId();
-  }
-
-  getMyUserName(): string {
-    return this.backend.getMyUserName();
   }
 
   private updateList(): void {
