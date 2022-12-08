@@ -7,22 +7,22 @@
     [config]="tn_detail__displayconfig"
   ></app-tn-detail>
 
-    <button
-      mat-raised-button
-      class="page-action-buttons"
-      color="primary"
-      (click)="onButton('register')"
-      [hidden]="!isHiddenButton('register')"
-    >Register to this tournament</button>
-
     <div class="button-row">
       <button
-        mat-raised-button
-        class="page-action-buttons"
-        color="primary"
-        (click)="onButton('manage')"
-        [hidden]="!isHiddenButton('manage')"
-      >Manage</button>
+          mat-raised-button
+          color="primary"
+          (click)="onButton('register')"
+          [hidden]="!isHiddenButton('register')">
+        Register to this tournament
+      </button>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('manage')"
+          [hidden]="!isHiddenButton('manage')">
+        Manage
+      </button>
   
     </div>
 </div>

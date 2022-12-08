@@ -37,18 +37,17 @@ const routes: Routes = [
     ],
   },
   { path: 'tn-manage',
-  children: [
-    { path: ':id', component: TnManagePageComponent },
-    { path: '**', redirectTo: '/tn-list' },
-  ],
-},
+    children: [
+      { path: ':id', component: TnManagePageComponent },
+      { path: '**', redirectTo: '/tn-list' },
+    ],
+  },
   { path: 'tn-create',
-    component: TnCreatePageComponent,
-  children: [
-    { path: ':id', component: TnCreatePageComponent },
-   // { path: '**', redirectTo: '/tn-list' },
-  ],
-},
+    children: [
+      { path: ':id', component: TnCreatePageComponent },
+      { path: '', component: TnCreatePageComponent },
+    ],
+  },
 
 ];
 

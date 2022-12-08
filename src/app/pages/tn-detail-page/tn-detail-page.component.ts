@@ -27,7 +27,6 @@ export class TnDetailPageComponent implements OnInit {
   currentUser: any = {};
 
   constructor(private route: ActivatedRoute, 
-    // private backend: BackendService, 
     private backend: ApibackendService,
     public authService: AuthService,
     private router:Router) { 
@@ -55,31 +54,25 @@ export class TnDetailPageComponent implements OnInit {
     // [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
     this.backend.getPlayerist([]).subscribe((res) => {
       if (res.status == 1) {
-        this.players_info = res.info;
+        this.players_info = res.data;
       }
+      // console.log(`tn-detail-page: backend.getTn.subscribe(): players_info = ${JSON.stringify(this.players_info)}`);
     });
-    this.backend.getTnFullList([]).subscribe((res) => {
+    this.backend.getTn(this.tn_id).subscribe((res) => {
       if (res.status == 1) {
-        this.tn_info = res.info.get(this.tn_id) ?? {};
+        this.tn_info = res.data ?? {};
       }
+      // console.log(`tn-detail-page: backend.getTn.subscribe(): tn_info = ${JSON.stringify(this.tn_info)}`);
     });
-
-    console.log(this.tn_info);
-    if (Object.keys(this.tn_info).length == 0) {
-      // if no tournament is found, redirect the page to tn-list
-      //   this code is dirty, user will see an empty detail page before redirection
-      //window.location.href = '/tn-list';
-      this.router.navigate(["tn-list"]);
-    }
   }
 
   isHiddenButton(btn: string): boolean {
     if (btn == 'manage') {
-      if (this.currentUser.username == this.tn_info.owner) {
+      if (this.tn_info && this.backend.getMyUserId() == this.tn_info.owner) {
         return true;
       }
     } else if (btn == 'register') {
-      if (this.tn_info.status == 'enrolling' && !this.tn_info.players.includes(this.currentUser.username)) {
+      if (this.tn_info && this.tn_info.status == 'enrolling' && !this.tn_info.players.includes(this.backend.getMyUserId())) {
         return true;
       }
     }

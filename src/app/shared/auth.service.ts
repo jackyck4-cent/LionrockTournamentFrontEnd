@@ -57,6 +57,7 @@ export class AuthService {
           Provide display name, reference for interface
           */
           localStorage.setItem("access_token", res.token);
+          // console.log(`access token = ${res.token}`);
 
           localStorage.setItem("display_name", res.user.display_name);
           localStorage.setItem("role", res.user.role);

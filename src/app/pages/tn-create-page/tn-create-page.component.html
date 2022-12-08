@@ -1,26 +1,31 @@
 <div class="container">
   
-    <div class="page-title">Create New Tournament</div>
+  <div class="page-title">{{page_title}}</div>
 
-    <app-tn-detail
-      [tn_id]="tn_id"
-      [config]="tn_detail__displayconfig"
-    ></app-tn-detail>
-  
-    <div class="button-row">
-      <button
+  <app-tn-detail
+    [tn_id]="tn_id"
+    [tn_info]="tn_info"
+    [config]="tn_detail__displayconfig"
+  ></app-tn-detail>
+
+  <div class="button-row">
+    <button
         mat-raised-button
         color="primary"
-        (click)="onButton('confirm')"
-        [hidden]="!isHiddenButton('confirm')"
-      >Confirm</button>
-      <button
+        (click)="onButton('create')"
+        [disabled]="isDisabledButton('create')"
+        [hidden]="isHiddenButton('create')">
+      Create
+    </button>
+    <button
         mat-raised-button
         color="primary"
-        (click)="onButton('start_enrolling')"
-        [hidden]="!isHiddenButton('start_enrolling')"
-      >Cancel</button>      
-    
-    </div>
+        (click)="onButton('update')"
+        [disabled]="isDisabledButton('update')"
+        [hidden]="isHiddenButton('update')">
+      Update
+    </button>
   </div>
+
+</div>
   

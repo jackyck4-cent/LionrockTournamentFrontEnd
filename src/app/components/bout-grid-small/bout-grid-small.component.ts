@@ -4,6 +4,7 @@ import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { MatTableDataSource } from '@angular/material/table';
+import { ApibackendService } from 'src/app/services/apibackend.service';
 
 @Component({
   selector: 'app-bout-grid-small',
@@ -16,20 +17,18 @@ export class BoutGridSmallComponent implements OnInit {
   config!: DisplayConfig;
 
   @Input() 
-  tn_id!: string;
-
-  @Input() 
   show_player_list!: boolean;
 
+  @Input() 
   tn_info!: TnInfo;
+
+  @Input() 
   players_info!: Map<string, PlayerInfo>;
 
-  constructor(private backend: BackendService) { }
+  constructor(private backend: ApibackendService) { }
 
   ngOnInit(): void {
-    console.log(`bout-grid-small: tn_id=${this.tn_id}`);
-    [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
-    console.log(this.tn_info);
+    //console.log(this.tn_info);
   }
 
   getUserName(user_id: string): string {

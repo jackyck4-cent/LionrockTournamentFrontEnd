@@ -16,7 +16,7 @@ import { ApibackendService } from '../../services/apibackend.service';
 })
 export class TnListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'owner', 'start_date', 'end_date', 'status'];
+  displayedColumns: string[] = ['name', 'owner', /*'start_date', 'end_date',*/ 'status'];
   dataSource!: MatTableDataSource<TnInfo>;
   private all_players_info!: Map<string, PlayerInfo>;
   private all_tn_info!: Map<string, TnInfo>;
@@ -52,8 +52,9 @@ export class TnListComponent implements OnInit, AfterViewInit {
             this.all_tn_info = new Map(Object.entries(res.data.tournaments));
             this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
             this.dataSource.sort = this.sort;
+
+            //console.log("tn-list: ngOnInit()" + JSON.stringify(res.data));
           }
-            
         }
       );
 

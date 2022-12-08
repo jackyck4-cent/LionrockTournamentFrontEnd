@@ -19,7 +19,7 @@ export class TnListPageComponent implements OnInit {
   opt_draft: boolean = true;
 
   constructor(private filterService: TnListFilterServiceService,
-    private backend: ApibackendService,
+    public backend: ApibackendService,
     public authService: AuthService) { 
 
      
