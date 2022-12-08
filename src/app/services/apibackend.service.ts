@@ -109,6 +109,19 @@ export class ApibackendService {
     );
   }
 
+  // update a tournament
+  // return: latest tn_info
+  updateTn(tn_info: TnInfo , tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/update/`+tn_info;
+    return this.http.post(api, tn_info , this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   // register myself to a enrolling tournament
   //     fail if myself has already registered to the tournament
   // return: latest tn_info
@@ -129,6 +142,20 @@ export class ApibackendService {
   startTn(tn_id: string): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/start/`+tn_id;
+    return this.http.get(api, this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // change enroll start for a tournament (status: "draft"->"enroll")
+  //     owner operation only
+  // return: latest tn_info
+  enrollnow(tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/enroll/`+tn_id;
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {
         return res || {};
