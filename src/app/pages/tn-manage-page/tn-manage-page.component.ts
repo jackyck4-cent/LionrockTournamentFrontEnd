@@ -5,6 +5,7 @@ import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
+import { ApibackendService } from 'src/app/services/apibackend.service';
 
 @Component({
   selector: 'app-tn-manage-page',
@@ -29,31 +30,122 @@ export class TnManagePageComponent implements OnInit {
   change to api
   status change
   result update
-  
   */
 
-  constructor(private route: ActivatedRoute, backend: BackendService, router: Router) {
+  constructor(private route: ActivatedRoute, 
+      private backend: ApibackendService, 
+      private router: Router) {
+  }
+
+  ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
-    [this.players_info, this.tn_info] = backend.getTn(this.tn_id)
-    console.log(this.tn_info);
-    if (Object.keys(this.tn_info).length == 0) {
-      // if no tournament is found, redirect the page to tn-list
-      //   this code is dirty, user will see an empty detail page before redirection
-      //window.location.href = '/tn-list';
-      router.navigate(["tn-list"]);
+    if (this.tn_id) {
+      this.backend.getPlayerist([]).subscribe((res) => {
+        if (res.status == 1) {
+          this.players_info = new Map<string, PlayerInfo> (
+            Object.entries(res.data)
+          );
+          // console.log(`tn-detail: players_info = ${JSON.stringify(this.players_info)}`);
+        }
+      });
+      this.backend.getTn(this.tn_id).subscribe((res) => {
+        if (res.status == 1) {
+          this.tn_info = <TnInfo> res.data ?? {};
+          // console.log(`tn-detail: tn_info = ${JSON.stringify(this.tn_info)}`);
+        }
+      });
     }
   }
 
-  ngOnInit(): void {}
+  private reloadComponent() {
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+  }
 
-  onButton(btn: string) {
-    console.log(`Clicked "${btn}" button`);
+  private getCurrRoundBouts(): any {
+    if (this.tn_info.status == 'started') {
+      let curr_round = this.tn_info.current_round;
+      switch (curr_round) {
+        case '2': case '_2':
+          return this.tn_info.bouts['_2'];
+        case '8': case '_8':
+          return this.tn_info.bouts['_8'];
+        case '16': case '_16':
+          return this.tn_info.bouts['_16'];
+      }
+    }
+    return null;
+  }
+
+  private hasMarkedAllWinners(): boolean {
+    let bouts: string[][] = this.getCurrRoundBouts();
+    if (bouts) {
+      for (let i = 0; i < bouts.length; ++i) {
+        if (!bouts[i][2]) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   isHiddenButton(btn: string): boolean {
-    return true;
+      if (this.tn_info) {
+      switch (btn) {
+        case 'start_enrolling':
+          return !(this.tn_info.status == 'draft');
+        case 'start_game':
+          return !(this.tn_info.status == 'enrolling' && this.tn_info.size == this.tn_info.players.length);
+        case 'set_winners':
+          return !(this.tn_info.status == 'started');
+        case 'next_round':
+          return !(this.tn_info.status == 'started' && this.hasMarkedAllWinners());
+        case 'modify':
+          return !(this.tn_info.owner == this.backend.getMyUserId());
+        case 'delete':
+          return !(this.tn_info.owner == this.backend.getMyUserId());
+      }
+    }
+    return false;
   }
+
+  onButton(btn: string) {
+    console.log(`Clicked "${btn}" button`);
+    if (this.tn_info) {
+      switch (btn) {
+        case 'start_enrolling':
+          this.backend.enrollTn(this.tn_id).subscribe((res) => {
+            if (res.status == 1) {
+              this.reloadComponent();
+            } else {
+              alert(`Failed to register to the tournament: status=${res.status}`);
+            }
+          });
+          break;
+        case 'start_game':
+          alert(`Not yet implemented: ${btn}`);
+          break;
+        case 'set_winners':
+          alert(`Not yet implemented: ${btn}`);
+          break;
+        case 'next_round':
+          alert(`Not yet implemented: ${btn}`);
+          break;
+        case 'modify':
+          alert(`Not yet implemented: ${btn}`);
+          break;
+        case 'delete':
+          alert(`Not yet implemented: ${btn}`);
+          break;
+      }
+    }
+  }
+
 }
+
 /*  
 if tournament status is "draft", show button: : "Confirm", "Start Enrolling", "Cancel", "Delete"
 if tournament status is "enrolling", show button: "Confirm", "Start Game", "Cancel", "Delete"

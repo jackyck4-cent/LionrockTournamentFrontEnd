@@ -94,10 +94,7 @@ export class TnDetailPageComponent implements OnInit {
     if (btn == 'register') {
       this.backend.registerTn(this.tn_id).subscribe((res) => {
         if (res.status == 1) {
-          //this.tn_info.players = res.data.players;
-          //this.router.navigate([])
           this.reloadComponent();
-      
         } else {
           alert(`Failed to register to the tournament: status=${res.status}`);
         }
