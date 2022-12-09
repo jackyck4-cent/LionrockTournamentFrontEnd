@@ -175,10 +175,10 @@ export class ApibackendService {
   //     parameter winners is array of winner's username
   // if success, then
   //     winner(s) will advance to next round's bouts
-  setRoundWinners(tn_id: string, winners: string[]): Observable<any> {
+  setRoundWinners(tn_id: string, tn_info: TnInfo): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/winner/`+tn_id;
-    return this.http.post(api, { 'winners' : winners }  , this.httpOptions ).pipe(
+    return this.http.post(api, { 'winners' : tn_info }  , this.httpOptions ).pipe(
       map((res) => {
         return res || {};
       }),
