@@ -82,7 +82,7 @@ export class TnCreatePageComponent implements OnInit {
       this.backend.updateTn(this.tn_info, this.tn_id).subscribe((res) => {
         if (res.status == 1) {
           // done update, go to tn-manage-page
-          this.router.navigate([`tn-manage/${this.tn_info}`]);
+          this.router.navigate([`tn-manage/${this.tn_id}`]);
         }
       });
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApibackendService } from 'src/app/services/apibackend.service';
 import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
 import { AuthService } from "../../shared/auth.service";
@@ -20,7 +21,8 @@ export class TnListPageComponent implements OnInit {
 
   constructor(private filterService: TnListFilterServiceService,
     public backend: ApibackendService,
-    public authService: AuthService) { 
+    public authService: AuthService,
+    private router: Router) { 
 
      
     } 
@@ -52,5 +54,11 @@ export class TnListPageComponent implements OnInit {
     console.log(`    registered=${this.opt_registered}, owned=${this.opt_owned}, enrolling=${this.opt_enrolling}`);
     console.log(`    started=${this.opt_started}, completed=${this.opt_completed}, draft=${this.opt_draft}`);
     this.updateList();
+  }
+
+  onButton(btn: string) {
+    if (btn == 'create-tn') {
+      this.router.navigate(['tn-create']);
+    }
   }
 }

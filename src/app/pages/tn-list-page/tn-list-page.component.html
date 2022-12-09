@@ -12,15 +12,14 @@
     </mat-button-toggle-group>
   </div> 
   <br>
-  <!-- <button mat-raised-button color="accent" (click)="onTestButton()">Test: print tn_info</button> -->
-  <div *ngIf="this.authService.isLoggedIn" >Who am I?  ({{backend.getMyUserId()}})  {{backend.getMyUserName()}}</div>
-  <br>
   <div *ngIf="this.authService.isLoggedIn">
-    <a
-      
-      class="p-2 text-dark"
-      routerLink="/tn-create">
-      New Tournaments</a>
+    <div class="button-row">
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('create-tn')">
+        Create New Tournament
+      </button>
   </div>
   <br />
   <div></div>
