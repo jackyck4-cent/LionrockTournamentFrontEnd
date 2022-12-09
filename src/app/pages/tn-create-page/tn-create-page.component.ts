@@ -98,4 +98,14 @@ export class TnCreatePageComponent implements OnInit {
       });
     }
   }
+
+  infoChangeEvent(info:string)
+  {
+  
+    let inputdata:TnInfo = JSON.parse(info)
+    this.tn_info.name = inputdata.name;
+    this.tn_info.description = inputdata.description;
+    this.tn_info.size = inputdata.size;
+    console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
+  }
 }

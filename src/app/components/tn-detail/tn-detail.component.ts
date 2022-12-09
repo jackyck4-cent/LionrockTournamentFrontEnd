@@ -26,6 +26,7 @@ export class TnDetailComponent implements OnInit {
   players_info = new Map<string, PlayerInfo>();
 
   @Output() boutChangeEvent = new EventEmitter<string>();
+  @Output() infoChangeEvent = new EventEmitter<string>();
 
   constructor(private route: ActivatedRoute, 
       private backend: ApibackendService) {
@@ -108,5 +109,11 @@ export class TnDetailComponent implements OnInit {
     //alert(round+" "+user_id);
     //console.log(`clicked... Round ${round} / User ${user_id}`);
     this.boutChangeEvent.emit(info);
+  }
+
+  changeVal(evt:any)
+  {
+    console.log("CV"+JSON.stringify(this.tn_info))
+    this.infoChangeEvent.emit(JSON.stringify(this.tn_info));
   }
 }

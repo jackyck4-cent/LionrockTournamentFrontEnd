@@ -2,13 +2,13 @@
   <form class="tn-detail-form">
 
     <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('name')" >
-      <mat-label>Name</mat-label>
-      <input matInput name="name" [(ngModel)]="tn_info.name" [readonly]="config.readonly.includes('name')" />
+      <mat-label>Name</mat-label> 
+      <input matInput name="name" (change)="changeVal($event)" [(ngModel)]="tn_info.name" [readonly]="config.readonly.includes('name')" />
     </mat-form-field>
 
     <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('description')" >
       <mat-label>Description</mat-label>
-      <input matInput name="description" [(ngModel)]="tn_info.description" [readonly]="config.readonly.includes('description')" />
+      <input matInput name="description" (change)="changeVal($event)" [(ngModel)]="tn_info.description" [readonly]="config.readonly.includes('description')" />
     </mat-form-field>
     
     <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('owner')" >
@@ -27,9 +27,9 @@
       <div [hidden]="config.hidden.includes('size')">
         <mat-label>Size </mat-label>
         <mat-radio-group name="tn_info__size" [(ngModel)]="tn_info.size" >
-          <mat-radio-button class="tn-info--size" [value]="4">4</mat-radio-button>
-          <mat-radio-button class="tn-info--size" [value]="8">8</mat-radio-button>
-          <mat-radio-button class="tn-info--size" [value]="16">16</mat-radio-button>
+          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="4">4</mat-radio-button>
+          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="8">8</mat-radio-button>
+          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="16">16</mat-radio-button>
         </mat-radio-group>
       </div>
     </ng-template>
