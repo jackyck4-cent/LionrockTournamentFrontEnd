@@ -17,11 +17,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center;
     padding: 8px 10px;
     margin: 4px 20px;
-    border-radius: 10px;
+    border-radius: 20px;
     border-color: black;
     border: 1px solid black;
     background-color: LightCyan;
-    box-shadow: 4px 4px rgba(128, 128, 128, 0.3);
 }
 
 .username-self {
@@ -30,4 +29,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .username-empty {
     background-color: lightgray;
+}
+
+.username-clickable {
+    border-color: rgb(69, 207, 41);
+    border: 3px solid black;
+    box-shadow: 6px 6px rgba(128, 128, 128, 0.548);
 }

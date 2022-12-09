@@ -3,7 +3,6 @@ import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
-import { MatTableDataSource } from '@angular/material/table';
 import { ApibackendService } from 'src/app/services/apibackend.service';
 
 @Component({
@@ -20,6 +19,9 @@ export class BoutGridSmallComponent implements OnInit {
   show_player_list!: boolean;
 
   
+  @Input() 
+  page_type = '';
+
   @Input() 
   tn_info!: TnInfo;
 
@@ -41,11 +43,22 @@ export class BoutGridSmallComponent implements OnInit {
       return '---';
   }
 
-  getUserNameCssClasses(user_id: string): string {
-    // TODO: temporary use 'a0001' for current user, need to change here
-    return `username ${user_id == this.backend.getMyUserId() ? 'username-self': (user_id ? '': 'username-empty')}`;
+  getUserNameCssClasses(user_id: string, round: string): string {
+    let s = 'username ';
+    if (user_id == this.backend.getMyUserId()) {
+      s += 'username-self ';
+    }
+    if (!user_id) {
+      s += 'username-empty ';
+    } else if (round) {
+      if (this.shouldButtonClickable(round)) {
+        s += 'username-clickable ';
+      }
+    }
+    return s;
   }
 
+<<<<<<< HEAD
   onClick(round: string, user_id: string): void {
     let bouts = this.tn_info.bouts[round];
     for (var i=0;i<bouts.length;i++)
@@ -59,5 +72,34 @@ export class BoutGridSmallComponent implements OnInit {
     //alert(round+" "+user_id);
     //console.log(`clicked... Round ${round} / User ${user_id}`);
     this.newItemEvent.emit(round+"+"+user_id);
+=======
+  shouldButtonClickable(round: string) {
+    if (this.page_type == 'manage' 
+        && this.backend.getMyUserId() == this.tn_info.owner
+        && round
+        && round == this.tn_info.current_round) {
+      return true;
+    }
+    return false;
+  }
+
+  onClick(round: string, user_id: string, row_index: number): void {
+    if (this.shouldButtonClickable(round)) {
+      console.log(`clicked... Round ${round} / Bout #${row_index} / User ${user_id}`);
+      if (this.tn_info.current_round == round) {
+        let tn_info_copy = JSON.parse(JSON.stringify(this.tn_info));
+        tn_info_copy.bouts[round][row_index][2] = user_id;
+        console.log(`Call setRoundWinners()...`);
+        this.backend.setRoundWinners(tn_info_copy.tn_id, tn_info_copy).subscribe((res) => {
+          if (res.status == 1) {
+            this.tn_info = <TnInfo> res.data;
+            console.log(`setRoundWinners returns tn_info = ${JSON.stringify(this.tn_info)}`);
+          } else {
+            console.log(`Failed in calling setRoundWinners()`);
+          }
+        });
+      }
+    }
+>>>>>>> 58912e31b91d31912262d6a314469fe351d2d32f
   }
 }

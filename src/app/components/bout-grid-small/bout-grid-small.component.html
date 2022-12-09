@@ -7,11 +7,11 @@
           <ng-container *ngFor="let row of (tn_info.players | splitColumns:2); index as r">
             <tr>
               <td width="45%" height="50px">
-                <div [ngClass]="getUserNameCssClasses(row[0])">{{getUserName(row[0])}}</div>
+                <div [ngClass]="getUserNameCssClasses(row[0], '')">{{getUserName(row[0])}}</div>
               </td>
               <td width="45%">
                 <div *ngIf="row[1]">
-                  <div [ngClass]="getUserNameCssClasses(row[1])">{{getUserName(row[1])}}</div>
+                  <div [ngClass]="getUserNameCssClasses(row[1], '')">{{getUserName(row[1])}}</div>
                 </div>
               </td>
              
@@ -31,10 +31,13 @@
           <mat-tab label="Round of 16">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
+                <tr [hidden]="!shouldButtonClickable('_16')">
+                  <td colspan="3" class="td-hint">Click below to set the winners...</td>
+                </tr>
                 <ng-container *ngFor="let row of tn_info.bouts['_16']; index as r">
                   <tr>
                     <td width="45%" height="50px">
-                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_16', row[0])">
+                      <div [ngClass]="getUserNameCssClasses(row[0], '_16')" (click)="onClick('_16', row[0], r)">
                         <span *ngIf="row[2] && row[0]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -42,10 +45,10 @@
                       </div>
                     </td>
                     <td width="3%">
-                      <div style="text-align:center">VS</div>
+                      <div style="text-align:center"><b>VS</b></div>
                     </td>
                     <td width="45%">
-                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_16', row[1])">
+                      <div [ngClass]="getUserNameCssClasses(row[1], '_16')" (click)="onClick('_16', row[1], r)">
                         <span *ngIf="row[2] && row[1]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -62,10 +65,13 @@
           <mat-tab label="Quarter-final">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
+                <tr [hidden]="!shouldButtonClickable('_8')">
+                  <td colspan="3" class="td-hint">Click below to set the winners...</td>
+                </tr>
                 <ng-container *ngFor="let row of tn_info.bouts['_8']; index as r">
                   <tr>
                     <td width="45%" height="50px">
-                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_8', row[0])">
+                      <div [ngClass]="getUserNameCssClasses(row[0], '_8')" (click)="onClick('_8', row[0], r)">
                         <span *ngIf="row[2] && row[0]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -73,10 +79,10 @@
                       </div>
                     </td>
                     <td width="3%">
-                      <div style="text-align:center">VS</div>
+                      <div style="text-align:center"><b>VS</b></div>
                     </td>
                     <td width="45%">
-                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_8', row[1])">
+                      <div [ngClass]="getUserNameCssClasses(row[1], '_8')" (click)="onClick('_8', row[1], r)">
                         <span *ngIf="row[2] && row[1]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -93,10 +99,13 @@
           <mat-tab label="Semi-final">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
+                <tr [hidden]="!shouldButtonClickable('_4')">
+                  <td colspan="3" class="td-hint">Click below to set the winners...</td>
+                </tr>
                 <ng-container *ngFor="let row of tn_info.bouts['_4']; index as r">
                   <tr>
                     <td width="45%" height="50px">
-                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_4', row[0])">
+                      <div [ngClass]="getUserNameCssClasses(row[0], '_4')" (click)="onClick('_4', row[0], r)">
                         <span *ngIf="row[2] && row[0]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -104,10 +113,10 @@
                       </div>
                     </td>
                     <td width="3%">
-                      <div style="text-align:center">VS</div>
+                      <div style="text-align:center"><b>VS</b></div>
                     </td>
                     <td width="45%">
-                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_4', row[1])">
+                      <div [ngClass]="getUserNameCssClasses(row[1], '_4')" (click)="onClick('_4', row[1], r)">
                         <span *ngIf="row[2] && row[1]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -124,10 +133,13 @@
           <mat-tab label="Final">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
+                <tr [hidden]="!shouldButtonClickable('_2')">
+                  <td colspan="3" class="td-hint">Click below to set the winners...</td>
+                </tr>
                 <ng-container *ngFor="let row of tn_info.bouts['_2']; index as r">
                   <tr>
                     <td width="45%" height="50px">
-                      <div [ngClass]="getUserNameCssClasses(row[0])" (click)="onClick('_2', row[0])">
+                      <div [ngClass]="getUserNameCssClasses(row[0], '_2')" (click)="onClick('_2', row[0], r)">
                         <span *ngIf="row[2] && row[0]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>
@@ -135,10 +147,10 @@
                       </div>
                     </td>
                     <td width="3%">
-                      <div style="text-align:center">VS</div>
+                      <div style="text-align:center"><b>VS</b></div>
                     </td>
                     <td width="45%">
-                      <div [ngClass]="getUserNameCssClasses(row[1])" (click)="onClick('_2', row[1])">
+                      <div [ngClass]="getUserNameCssClasses(row[1], '_2')" (click)="onClick('_2', row[1], r)">
                         <span *ngIf="row[2] && row[1]==row[2]">
                           <img src="/assets/images/medal.svg" height="18px">
                         </span>

@@ -18,6 +18,9 @@ export class TnDetailComponent implements OnInit {
   config!: DisplayConfig;
 
   @Input()
+  page_type = '';
+
+  @Input()
   tn_info = new TnInfo();
 
   players_info = new Map<string, PlayerInfo>();
