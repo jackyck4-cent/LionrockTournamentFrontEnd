@@ -58,21 +58,6 @@ export class BoutGridSmallComponent implements OnInit {
     return s;
   }
 
-<<<<<<< HEAD
-  onClick(round: string, user_id: string): void {
-    let bouts = this.tn_info.bouts[round];
-    for (var i=0;i<bouts.length;i++)
-    {
-      let row = bouts[i];
-       if (row[0] == user_id || row[1] == user_id)
-       {
-        this.tn_info.bouts[round][i][2] = user_id
-       }
-    }
-    //alert(round+" "+user_id);
-    //console.log(`clicked... Round ${round} / User ${user_id}`);
-    this.newItemEvent.emit(round+"+"+user_id);
-=======
   shouldButtonClickable(round: string) {
     if (this.page_type == 'manage' 
         && this.backend.getMyUserId() == this.tn_info.owner
@@ -100,6 +85,5 @@ export class BoutGridSmallComponent implements OnInit {
         });
       }
     }
->>>>>>> 58912e31b91d31912262d6a314469fe351d2d32f
   }
 }
