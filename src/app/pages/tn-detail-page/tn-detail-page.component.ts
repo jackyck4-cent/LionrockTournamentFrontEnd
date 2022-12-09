@@ -52,7 +52,7 @@ export class TnDetailPageComponent implements OnInit {
     */
 
     // [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
-    this.backend.getPlayerist([]).subscribe((res) => {
+    this.backend.getPlayerList([]).subscribe((res) => {
       if (res.status == 1) {
         this.players_info = res.data;
       }

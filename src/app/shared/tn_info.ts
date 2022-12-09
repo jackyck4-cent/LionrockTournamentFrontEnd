@@ -8,27 +8,27 @@ export class TnInfo {
     end_date!: string;
     status!: string;        // "draft", "enrolling", "started", "completed"
     players!: string[];     // list of player's user id
-    current_round!: string; // current round: ''=dontcare, '2'=final, '4'=semi-final, '8'=quarter-final, '16'=round-of-16
+    current_round!: string; // current round: ''=dontcare, '_2'=final, '_4'=semi-final, '_8'=quarter-final, '_16'=round-of-16
     champion!: string;
     bouts!: {[key: string]: string[][]};
         // {
-        //   '2': [
+        //   '_2': [
         //     // 1st-player, 2nd-player, winner
         //     ['', '', ''],
         //   ],
-        //   '4': [
+        //   '_4': [
         //     // 1st-player, 2nd-player, winner
         //     ['', '', ''],
         //     // 3rd-player, 4th-player, winner
         //     ['', '', ''],
         //   ],
-        //   '8': [
+        //   '_8': [
         //     ['', '', ''],
         //     ['', '', ''],
         //     ['', '', ''],
         //     ['', '', ''],
         //   ],
-        //   '16': [
+        //   '_16': [
         //     ['', '', ''],
         //     ['', '', ''],
         //     ['', '', ''],

@@ -38,7 +38,7 @@ export class TnManagePageComponent implements OnInit {
   ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     if (this.tn_id) {
-      this.backend.getPlayerist([]).subscribe((res) => {
+      this.backend.getPlayerList([]).subscribe((res) => {
         if (res.status == 1) {
           this.players_info = new Map<string, PlayerInfo> (
             Object.entries(res.data)
@@ -49,7 +49,7 @@ export class TnManagePageComponent implements OnInit {
       this.backend.getTn(this.tn_id).subscribe((res) => {
         if (res.status == 1) {
           this.tn_info = <TnInfo> res.data ?? {};
-          // console.log(`tn-detail: tn_info = ${JSON.stringify(this.tn_info)}`);
+          console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
         }
       });
     }
@@ -66,11 +66,13 @@ export class TnManagePageComponent implements OnInit {
     if (this.tn_info.status == 'started') {
       let curr_round = this.tn_info.current_round;
       switch (curr_round) {
-        case '2': case '_2':
+        case '_2':
           return this.tn_info.bouts['_2'];
-        case '8': case '_8':
+        case '_4':
+          return this.tn_info.bouts['_4'];
+        case '_8':
           return this.tn_info.bouts['_8'];
-        case '16': case '_16':
+        case '_16':
           return this.tn_info.bouts['_16'];
       }
     }
@@ -124,7 +126,13 @@ export class TnManagePageComponent implements OnInit {
           });
           break;
         case 'start_game':
-          alert(`Not yet implemented: "${btn}" button`);
+          this.backend.startTn(this.tn_id).subscribe((res) => {
+            if (res.status == 1) {
+              this.reloadComponent();
+            } else {
+              alert(`Failed to register to the tournament: status=${res.status}`);
+            }
+          });
           break;
         case 'set_winners':
           alert(`Not yet implemented: "${btn}" button`);
@@ -143,11 +151,3 @@ export class TnManagePageComponent implements OnInit {
   }
 
 }
-
-/*  
-if tournament status is "draft", show button: : "Confirm", "Start Enrolling", "Cancel", "Delete"
-if tournament status is "enrolling", show button: "Confirm", "Start Game", "Cancel", "Delete"
-if tournament status is "started", show button: "Confirm", "Cancel", "Delete", "Update Result", "Proceed to Next Round"
-if tournament status is "completed", no button is shown, only show Result Tree
-
-*/

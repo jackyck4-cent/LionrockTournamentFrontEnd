@@ -29,7 +29,7 @@ export class TnDetailComponent implements OnInit {
   ngOnInit(): void {
     // console.log(`tn-detail: tn_id=${this.tn_id}`);
     if (this.tn_id) {
-      this.backend.getPlayerist([]).subscribe((res) => {
+      this.backend.getPlayerList([]).subscribe((res) => {
         if (res.status == 1) {
           this.players_info = new Map<string, PlayerInfo> (
             Object.entries(res.data)

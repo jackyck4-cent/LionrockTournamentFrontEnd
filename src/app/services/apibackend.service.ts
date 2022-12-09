@@ -72,7 +72,7 @@ export class ApibackendService {
     );
   }
 
-  getPlayerist(filters: string[]): Observable<any> {
+  getPlayerList(filters: string[]): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/players`;
     return this.http.get(api, this.httpOptions ).pipe(
@@ -136,9 +136,14 @@ export class ApibackendService {
     );
   }
 
-  // start a tournament (status: "enroll"->"started")
+  // start a tournament
   //     owner operation only
   // return: latest tn_info
+  // if success, then
+  //     status: "enroll"->"started"
+  //     current_round: start round depends on tournament size
+  //                    ('_2'=final, '_4'=semi-final, '_8'=quarter-final, '_16'=round-of-16)
+  //     bouts: initialized (see tn_info.ts), players should be placed in current round's bouts
   startTn(tn_id: string): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/start/`+tn_id;
@@ -168,7 +173,8 @@ export class ApibackendService {
   //     owner operation only
   //     status must be "started"
   //     parameter winners is array of winner's username
-  //     if the current round is "final", set status to "completed" and the winner to "champion"
+  // if success, then
+  //     winner(s) will advance to next round's bouts
   setRoundWinners(tn_id: string, winners: string[]): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/winner/`+tn_id;
@@ -184,8 +190,9 @@ export class ApibackendService {
   //     owner operation only
   //     status must be "started"
   //     all winners of current round must be set
-  //     if the current round is "final", set status to "completed"
   // return: latest tn_info
+  // if success, then
+  //     if the current round is "final", set status to "completed" and the winner of to "champion"
   goNextRoundTn(tn_id: string): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/nextround/`+tn_id;
