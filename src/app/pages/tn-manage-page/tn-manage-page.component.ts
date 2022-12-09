@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DUMMY_TN_INFOS } from 'src/app/shared/dummy_data';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
-import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { ApibackendService } from 'src/app/services/apibackend.service';
 
@@ -135,8 +133,7 @@ export class TnManagePageComponent implements OnInit {
           alert(`Not yet implemented: "${btn}" button`);
           break;
         case 'modify':
-          // this.router.navigate([`tn-create/${this.tn_id}`])
-          alert(`Not yet implemented: "${btn}" button`);
+          this.router.navigate([`tn-create/${this.tn_id}`])
           break;
         case 'delete':
           alert(`Not yet implemented: "${btn}" button`);

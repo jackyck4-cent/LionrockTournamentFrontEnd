@@ -78,14 +78,13 @@ export class TnCreatePageComponent implements OnInit {
   onButton(btn: string) {
     console.log(`onButton("${btn}")`);
     if (btn == 'update' && this.tn_info) {
-      //console.log(`this.tn_info = ${JSON.stringify(this.tn_info)}`);
-      //this.backend.updateTn(this.tn_info, this.tn_id).subscribe((res) => {
-      //  if (res.status == 1) {
-      //    // done update, go to previous page
-      //    // this.location.back();
-      //    // this.router.navigate([``]);
-      //  }
-      //});
+      console.log(`this.tn_info = ${JSON.stringify(this.tn_info)}`);
+      this.backend.updateTn(this.tn_info, this.tn_id).subscribe((res) => {
+        if (res.status == 1) {
+          // done update, go to tn-manage-page
+          this.router.navigate([`tn-manage/${this.tn_info}`]);
+        }
+      });
 
     } else if (btn == 'create' && !this.tn_id) {
       console.log(`tn-create-page: create-button: tn_info = ${JSON.stringify(this.tn_info)}`);

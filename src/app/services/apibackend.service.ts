@@ -113,7 +113,7 @@ export class ApibackendService {
   // return: latest tn_info
   updateTn(tn_info: TnInfo , tn_id: string): Observable<any> {
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/update/`+tn_info;
+    let api = `${this.endpoint}/tournments2/update/`+tn_id;
     return this.http.post(api, tn_info , this.httpOptions ).pipe(
       map((res) => {
         return res || {};
