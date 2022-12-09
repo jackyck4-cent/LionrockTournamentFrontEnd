@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
@@ -19,11 +19,14 @@ export class BoutGridSmallComponent implements OnInit {
   @Input() 
   show_player_list!: boolean;
 
+  
   @Input() 
   tn_info!: TnInfo;
 
   @Input() 
   players_info!: Map<string, PlayerInfo>;
+
+  @Output() newItemEvent = new EventEmitter<string>();
 
   constructor(private backend: ApibackendService) { }
 
@@ -32,7 +35,10 @@ export class BoutGridSmallComponent implements OnInit {
   }
 
   getUserName(user_id: string): string {
-    return this.players_info.get(user_id)?.name ?? '---';
+    if (user_id != "")
+      return this.players_info.get(user_id)?.name ?? '---';
+    else
+      return '---';
   }
 
   getUserNameCssClasses(user_id: string): string {
@@ -41,6 +47,17 @@ export class BoutGridSmallComponent implements OnInit {
   }
 
   onClick(round: string, user_id: string): void {
-    console.log(`clicked... Round ${round} / User ${user_id}`);
+    let bouts = this.tn_info.bouts[round];
+    for (var i=0;i<bouts.length;i++)
+    {
+      let row = bouts[i];
+       if (row[0] == user_id || row[1] == user_id)
+       {
+        this.tn_info.bouts[round][i][2] = user_id
+       }
+    }
+    //alert(round+" "+user_id);
+    //console.log(`clicked... Round ${round} / User ${user_id}`);
+    this.newItemEvent.emit(round+"+"+user_id);
   }
 }

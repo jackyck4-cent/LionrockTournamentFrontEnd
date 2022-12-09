@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApibackendService } from 'src/app/services/apibackend.service';
 import { DisplayConfig } from 'src/app/shared/displayconfig';
@@ -21,6 +21,8 @@ export class TnDetailComponent implements OnInit {
   tn_info = new TnInfo();
 
   players_info = new Map<string, PlayerInfo>();
+
+  @Output() boutChangeEvent = new EventEmitter<string>();
 
   constructor(private route: ActivatedRoute, 
       private backend: ApibackendService) {
@@ -85,5 +87,23 @@ export class TnDetailComponent implements OnInit {
         return 'Draft';
     }
     return '';
+  }
+
+  boutschange(info:string)
+  {
+    //alert(info)
+    let infodata = info.split("+");
+    let bouts = this.tn_info.bouts[infodata[0]];
+    for (var i=0;i<bouts.length;i++)
+    {
+      let row = bouts[i];
+       if (row[0] == infodata[1] || row[1] == infodata[1])
+       {
+        this.tn_info.bouts[infodata[0]][i][2] = infodata[1]
+       }
+    }
+    //alert(round+" "+user_id);
+    //console.log(`clicked... Round ${round} / User ${user_id}`);
+    this.boutChangeEvent.emit(info);
   }
 }

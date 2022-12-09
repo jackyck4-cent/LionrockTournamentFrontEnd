@@ -1,0 +1,39 @@
+<div class="cssTiers"   [ngClass]="{'tree_16': tn_info.size == 16, 'tree_8': tn_info.size == 8, 'tree_4': tn_info.size == 4 }" >
+    <div class="cssTier" *ngIf="tn_info.size == 16 ">
+        <div class="cssCells">
+            <div class="cssCell" *ngFor="let row of tn_info.bouts['_16']; index as i; first as isFirst">
+                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="cssTier" *ngIf="tn_info.size == 16 || tn_info.size == 8 ">
+        <div class="cssCells"  > 
+            <div class="cssCell" *ngFor="let row of tn_info.bouts['_8']; index as i; first as isFirst">
+                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="cssTier"  >
+        <div class="cssCells"  >
+            <div class="cssCell" *ngFor="let row of tn_info.bouts['_4']; index as i; first as isFirst">
+                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="cssTier">
+        <div class="cssCells">
+            <div class="cssCell" *ngFor="let row of tn_info.bouts['_2']; index as i; first as isFirst">
+                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cssTier">
+        <div class="cssCells">
+            <div class="cssCell" >
+                <div class="cssFrame">Champion : {{tn_info.bouts['_2'][0][2]}}</div>
+            </div>
+        </div>
+    </div>
+</div>

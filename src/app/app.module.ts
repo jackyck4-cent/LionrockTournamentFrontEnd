@@ -38,6 +38,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatChipsModule} from '@angular/material/chips';
+import { TreeComponent } from './components/tree/tree.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {MatChipsModule} from '@angular/material/chips';
     TnManagePageComponent,
     TnCreatePageComponent,
     SplitColumnsPipe,
+    TreeComponent,
   ],
   imports: [
     BrowserModule,

@@ -64,8 +64,18 @@
         [config]="config" 
         [show_player_list]="isShowPlayerList()"
         [tn_info]="tn_info"
-        [players_info]="players_info">
+        [players_info]="players_info"
+        (newItemEvent)="boutschange($event)" 
+      >
+      
       </app-bout-grid-small>
     </div>
+  </div>
+
+  <div *ngIf="tn_info.status != 'complete'">
+      <app-tree [tn_info]="tn_info">
+      </app-tree>
+      
+
   </div>
 </div>

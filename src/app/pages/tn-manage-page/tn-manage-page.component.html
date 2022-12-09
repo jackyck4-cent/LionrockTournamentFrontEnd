@@ -5,6 +5,7 @@
     <app-tn-detail
       [tn_id]="tn_id"
       [config]="tn_detail__displayconfig"
+      (boutChangeEvent)="boutschange($event)" 
     ></app-tn-detail>
   
     <div class="button-row">
@@ -25,7 +26,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="onButton('set_winners')"
+            (click)="onButton('set_winners')" 
             [hidden]="isHiddenButton('set_winners')">
           Set winners
         </button>

@@ -1,0 +1,115 @@
+$height:38px;
+$padding:20px;
+$linewidth:2px;
+
+
+.cssTiers {display:flex;
+    .cssTier {position:relative;width:20%;height:($padding + $height) * 8 + $padding;
+        &:nth-child(1) {
+            .cssCell {
+                &::before {display:none !important;}
+            }
+            
+        }
+        &:nth-child(2) {
+            .cssCell {
+                margin-top:$height * 2 ;
+                margin-bottom:$height * 2 ;
+            }
+
+            .cssCells {
+                &::after {top:$padding - $linewidth / 2 + $height * 2 ;height:($height + $padding - $linewidth / 2 )* 6  }
+            }
+            
+        }
+        &:nth-child(3) {
+            .cssCell {
+                margin-top:$height * 5 ;
+                margin-bottom:$height * 5 ;
+            }
+
+            .cssCells {
+                &::after {top:$padding - $linewidth / 2 + $height * 5  ;height:($height * 4 + $padding * 4 - $linewidth / 2  ) }
+            }
+            
+        }
+        &:nth-child(4) {
+            .cssCell {
+                
+            }
+        }
+
+        &:nth-child(5) {
+            .cssCell {
+                &::after {display:none !important;}
+            }
+        }
+
+        
+    }
+
+    &.tree_8 {
+        .cssTier{
+
+            &:nth-child(2) {
+                .cssCells {
+                    &::after {top:$padding - $linewidth / 2 + $height * 2 ;height:($height + $padding - $linewidth / 2 )* 2  }
+                }
+                
+            }
+
+            
+            &:nth-child(3) {
+                .cssCells {
+                    &::after {display:none !important;}
+                }
+                
+            }
+
+            &:nth-child(4) {
+                .cssCell {
+                    &::after {display:none !important;}
+                }
+                .cssCells {
+                    &::after {display:none !important;}
+                }
+            }
+        }
+        
+    }
+
+    &.tree_4 {
+        .cssTier{
+            &:nth-child(2) {
+                .cssCells {
+                    &::after {display:none !important;}
+                }
+                
+            }
+
+            &:nth-child(3) {
+                .cssCell {
+                    &::after {display:none !important;}
+                }
+                .cssCells {
+                    &::after {display:none !important;}
+                }
+                
+            }
+        }
+        
+    }
+
+    .cssCells {position: absolute;top:50%;transform: translateY(-50%);width:100%;
+        &::after {content:" ";background:#cccccc;position:absolute;top:$padding+$height/2 - $linewidth / 2 ;right:-$linewidth/2;width:$linewidth;height:calc(100% - #{2 * $padding+$height - $linewidth } )}
+    }
+    .cssCell {border-radius:10px;border-width:$linewidth/2;border-color:#cccccc;border-style:solid;margin:$padding;
+        box-sizing: border-box;
+        position:relative;height:$height;
+        .cssFrame {padding:10px 20px;text-align: center;}
+        &::after {content:" ";background:#cccccc;position:absolute;top:calc(50% - #{$linewidth/2 });right:-$padding;height:$linewidth;width:$padding;}
+        &::before {content:" ";background:#cccccc;position:absolute;top:calc(50% - #{$linewidth/2 });left:-$padding;height:$linewidth;width:$padding;}
+    }
+
+    
+}

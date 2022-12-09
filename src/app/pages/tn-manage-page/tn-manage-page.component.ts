@@ -22,6 +22,7 @@ export class TnManagePageComponent implements OnInit {
   tn_id!: string;
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
+  state_winner : boolean = false;
 
   /*
   Jacky 
@@ -135,10 +136,28 @@ export class TnManagePageComponent implements OnInit {
           });
           break;
         case 'set_winners':
-          alert(`Not yet implemented: "${btn}" button`);
+          //console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
+          //alert("1");
+          //alert(`Not yet implemented: "${btn}" button`);
+          this.backend.setRoundWinners(this.tn_id , this.tn_info).subscribe((res) => {
+            if (res.status == 1) {
+              this.tn_info = (res.data)
+              this.reloadComponent();
+            } else {
+              alert(`Failed to register to the tournament: status=${res.status}`);
+            }
+          });
           break;
         case 'next_round':
-          alert(`Not yet implemented: "${btn}" button`);
+          //alert(`Not yet implemented: "${btn}" button`);
+          this.backend.goNextRoundTn(this.tn_id).subscribe((res) => {
+            if (res.status == 1) {
+              this.tn_info = (res.data)
+              this.reloadComponent();
+            } else {
+              alert(`Failed to register to the tournament: status=${res.status}`);
+            }
+          });
           break;
         case 'modify':
           this.router.navigate([`tn-create/${this.tn_id}`])
@@ -150,4 +169,23 @@ export class TnManagePageComponent implements OnInit {
     }
   }
 
+  boutschange(info:string)
+  {
+    //alert(info)
+    let infodata = info.split("+");
+    let bouts = this.tn_info.bouts[infodata[0]];
+    for (var i=0;i<bouts.length;i++)
+    {
+      let row = bouts[i];
+       if (row[0] == infodata[1] || row[1] == infodata[1])
+       {
+        this.tn_info.bouts[infodata[0]][i][2] = infodata[1]
+       }
+    }
+    //alert(round+" "+user_id);
+    //console.log(`clicked... Round ${round} / User ${user_id}`);
+    
+  }
+
 }
+ 
