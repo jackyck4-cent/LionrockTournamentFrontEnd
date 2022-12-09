@@ -59,6 +59,7 @@ export class BoutGridSmallComponent implements OnInit {
   }
 
   shouldButtonClickable(round: string) {
+    console.log(this.page_type+"<<");
     if (this.page_type == 'manage' 
         && this.backend.getMyUserId() == this.tn_info.owner
         && round
@@ -72,8 +73,11 @@ export class BoutGridSmallComponent implements OnInit {
     if (this.shouldButtonClickable(round)) {
       console.log(`clicked... Round ${round} / Bout #${row_index} / User ${user_id}`);
       if (this.tn_info.current_round == round) {
+        /*
         let tn_info_copy = JSON.parse(JSON.stringify(this.tn_info));
         tn_info_copy.bouts[round][row_index][2] = user_id;
+
+        
         console.log(`Call setRoundWinners()...`);
         this.backend.setRoundWinners(tn_info_copy.tn_id, tn_info_copy).subscribe((res) => {
           if (res.status == 1) {
@@ -83,6 +87,20 @@ export class BoutGridSmallComponent implements OnInit {
             console.log(`Failed in calling setRoundWinners()`);
           }
         });
+        */
+
+        let bouts = this.tn_info.bouts[round];
+        for (var i=0;i<bouts.length;i++)
+        {
+          let row = bouts[i];
+          if (row[0] == user_id || row[1] == user_id)
+          {
+            this.tn_info.bouts[round][i][2] = user_id
+          }
+        }
+        //alert(round+" "+user_id);
+        //console.log(`clicked... Round ${round} / User ${user_id}`);
+        this.newItemEvent.emit(round+"+"+user_id);
       }
     }
   }

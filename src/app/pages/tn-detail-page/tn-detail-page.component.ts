@@ -20,6 +20,9 @@ export class TnDetailPageComponent implements OnInit {
   @Input()
   config!: DisplayConfig;
 
+  @Input()
+  page_type!: string;
+
   tn_id!: string;
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
@@ -41,6 +44,7 @@ export class TnDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     console.log(`tn-detail-page: tn_id=${this.tn_id}`);
+    console.log(this.page_type);
 
     /* 
     Jacky
