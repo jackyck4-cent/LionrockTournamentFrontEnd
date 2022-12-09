@@ -163,7 +163,16 @@ export class TnManagePageComponent implements OnInit {
           this.router.navigate([`tn-create/${this.tn_id}`])
           break;
         case 'delete':
-          alert(`Not yet implemented: "${btn}" button`);
+          //alert(`Not yet implemented: "${btn}" button`);
+          
+          this.backend.removenow(this.tn_id).subscribe((res) => {
+            if (res.status == 1) {
+              //this.reloadComponent();
+              this.router.navigate(['tn-list']);
+            } else {
+              alert(`Failed to register to the tournament: status=${res.status}`);
+            }
+          });
           break;
       }
     }

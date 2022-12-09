@@ -169,6 +169,17 @@ export class ApibackendService {
     );
   }
 
+  removenow(tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/remove/`+tn_id;
+    return this.http.get(api, this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   // set winners of the current round
   //     owner operation only
   //     status must be "started"
