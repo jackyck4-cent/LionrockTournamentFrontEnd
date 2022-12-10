@@ -12,6 +12,7 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators"; 
+//import { AsyncLocalStorage } from 'async_hooks';
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +65,8 @@ export class ApibackendService {
   }
 
   getTnList(filters: string[]): Observable<any> {
-    this.loadToken();
+    
+      this.loadToken();
     let api = `${this.endpoint}/tournments2`;
    
   //  alert(api);
@@ -88,9 +90,16 @@ export class ApibackendService {
   }
 
   getTnFullList(filters: string[]): Observable<any> {
+
+    let qstring = "";
+    if (filters.length > 0 )
+    {
+      qstring = "filters="+filters.join(",")
+    }
+    
     this.loadToken();
-    let api = `${this.endpoint}/tournments2/fulllist`;
-   
+    let api = `${this.endpoint}/tournments2/fulllist?`+qstring;
+
   //  alert(api);
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {

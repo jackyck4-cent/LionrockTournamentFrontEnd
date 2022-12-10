@@ -1,9 +1,17 @@
-<div class="container">
-    <div class="page-title">Landing Page</div>
-    <p>For development:</p>
-    <p><a routerLink="/welcome"  >Welcome</a></p>
-    <p><a routerLink="/tn-list"  >Tournament List</a></p>
-    <p><a routerLink="/tn-detail/1"  >Tournament Detail (1)</a></p>
-    <p><a routerLink="/tn-manage/2"  >Tournament Detail (2)</a></p>
+<div class="container pd-b50">
+    <!--<div class="page-title">Welcome</div>-->
+    <app-welcome-message></app-welcome-message>
+
+    <div class="card pd-t50" >
+        <div class="card-body">
+        
+            <div class="page-title">Latest tournment </div>
+
+            <div class="pagecontent">
+                <br>
+                <app-tn-list [latest]="'yes'"></app-tn-list>
+            </div>
+        </div>
+    </div>
 </div>
 
