@@ -29,13 +29,15 @@ export class TnListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    console.log('tn-list: ngOnInit()');
+
     // [this.all_players_info, this.all_tn_info] = this.backend.getTnList(['all']);
     // this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
     this.filterService.filterHasChanged().subscribe((filters: string[]) => {
       // this.filters = filters;
       
-      [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters)
-      console.log(this.all_players_info);
+      // [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters)
+      // console.log(this.all_players_info);
 
       /*
       Jacky

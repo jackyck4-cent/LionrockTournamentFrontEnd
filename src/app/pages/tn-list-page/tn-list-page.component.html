@@ -1,8 +1,8 @@
 <div class="container">
   <div class="page-title">Tournaments</div>
 
-  <div class="button-row">
-    <mat-button-toggle-group name="tn-list-filters" multiple *ngIf="this.authService.isLoggedIn">
+  <div class="button-row" *ngIf="this.authService.isLoggedIn">
+    <mat-button-toggle-group name="tn-list-filters" multiple>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_registered" (change)="toggleFilter('registered')">My Tournaments</mat-button-toggle>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_owned" (change)="toggleFilter('owned')">Owned</mat-button-toggle>
       <mat-button-toggle class="toggle-buttons" [checked]="opt_enrolling" (change)="toggleFilter('enrolling')">Enrolling</mat-button-toggle>
@@ -20,8 +20,8 @@
           (click)="onButton('create-tn')">
         Create New Tournament
       </button>
+    </div>
+    <br>
   </div>
-  <br />
-  <div></div>
   <app-tn-list></app-tn-list>
 </div>
