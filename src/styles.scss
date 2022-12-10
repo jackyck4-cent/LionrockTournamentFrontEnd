@@ -44,3 +44,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 3px solid black;
     box-shadow: 6px 6px rgba(128, 128, 128, 0.548);
 }
+
+
+.card {
+    .card-body {padding:40px 20px 40px;}
+    .pagecontent {padding:0 10px;
+        p {color:#274949;margin:0px;padding:0px}
+    } 
+
+    background: #ffffff;box-shadow: 5px 5px 5px #cccccc;
+}
+
+.pd-b50 {margin-bottom:50px}
+.pd-t50 {margin-top:50px}

@@ -16,6 +16,9 @@ import { ApibackendService } from '../../services/apibackend.service';
 })
 export class TnListComponent implements OnInit, AfterViewInit {
 
+  @Input()
+    latest:string = "";
+
   displayedColumns: string[] = ['name', 'owner', /*'start_date', 'end_date',*/ 'status'];
   dataSource!: MatTableDataSource<TnInfo>;
   private all_players_info!: Map<string, PlayerInfo>;
@@ -45,6 +48,9 @@ export class TnListComponent implements OnInit, AfterViewInit {
       if it is logged user , tab menu exist for filtering
       if it is non-logged , disaply only publish tournment
       */
+//     console.log(filters)
+      if (this.latest == "yes")
+        filters.push('latest');
       this.apibackend.getTnFullList(filters).subscribe(
         (res) => {
           //console.log(res);
