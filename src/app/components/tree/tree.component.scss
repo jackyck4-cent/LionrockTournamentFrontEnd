@@ -1,0 +1,165 @@
+$height:108px;
+$padding:20px;
+$linewidth:2px;
+
+
+.cssTiers {display:flex;
+    
+    .cssTier {position:relative;width:20%;height:($padding + $height) * 8 + $padding;
+        height:$height*8+$padding*9;
+        &:nth-child(1) {
+            .cssCell {
+                &::before {display:none !important;}
+            }
+            
+        }
+        &:nth-child(2) {
+            position: relative;
+            top:$height - $padding;
+            .cssCells {position:relative}
+            .cssCell {
+                margin-top:$height * 0 ;
+                margin-bottom:( $height * 1.5 + $padding * -1 );
+            }
+
+            .cssCells {
+                &::after {top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 7 + $padding * 0 - $linewidth * 2 )  }
+            }
+            
+        }
+        &:nth-child(3) {
+            position: relative;
+            top:$height * 2  - $padding;
+            .cssCells {position:relative}
+            .cssCell {
+                margin-top:$height * 0 ;
+                margin-bottom:( $height * 4 + $padding * -1 );
+            }
+
+            .cssCells {
+                &::after {top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+            }
+            
+        }
+        &:nth-child(4) {
+            position: relative;
+            top:$height * 4.5  - $padding;
+            .cssCells {position:relative}
+            .cssCell {
+                margin-top:$height * 0 ;
+                margin-bottom:( $height * 4 + $padding * -1 );
+            }
+
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {width:$padding+$linewidth;right:-($padding+$linewidth)}
+                }
+            }
+        }
+
+        &:nth-child(5) {
+            position: relative;
+            top:$height * 4.5  - $padding;
+            .cssCells {position:relative}
+            .cssCell {
+                margin-top:$height * 0 ;
+                margin-bottom:( $height * 4 + $padding * -1 );
+            }
+
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {display:none;width:$padding+$linewidth;}
+                }
+            }
+        }
+
+        
+    }
+
+    &.tree_8 {
+        height:$height*4+$padding*5;
+        .cssTier:nth-child(1) {
+           
+            .cssCells {
+                &::after {height:($height * 3.5 + $padding * 0 + $linewidth * 4 );  }
+            }
+            
+        }
+
+        .cssTier:nth-child(2) {
+           
+            .cssCells {
+                &::after {height:($height * 2.5 + $padding * -0.5 - $linewidth * 4 ) ;}
+            }
+            
+        }
+        .cssTier:nth-child(3) {
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {width:$padding+$linewidth;right:-($padding+$linewidth)}
+                }
+            }
+            
+        }
+        .cssTier:nth-child(4) {
+            top:$height * 2  - $padding;
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {display:none;width:$padding+$linewidth;right:-($padding+$linewidth)}
+                }
+            }
+        }
+    }
+
+    &.tree_4 {
+        height:$height*2+$padding*3;
+        
+
+        .cssTier:nth-child(1) {
+           
+            .cssCells {
+                &::after {height:($height * 1 + $padding * 0.5 + $linewidth * 6 ) ;}
+            }
+            
+        }
+        .cssTier:nth-child(2) {
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {width:$padding+$linewidth;right:-($padding+$linewidth)}
+                }
+            }
+            
+        }
+        .cssTier:nth-child(3) {
+            top:$height - $padding;
+            .cssCells {
+                &::after {display:none;top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+                .cssCell {
+                    &::after {display:none;width:$padding+$linewidth;right:-($padding+$linewidth)}
+                }
+            }
+        }
+    }
+
+    .cssCells {
+        /*osition: absolute;top:50%;transform: translateY(-50%);*/width:100%;
+        &::after {content:" ";background:#cccccc;position:absolute;top:$padding+$height/2 - $linewidth / 2 ;right:-$linewidth/2;width:$linewidth;height:calc(100% - #{2 * $padding+$height - $linewidth } )}
+    }
+    .cssCell {border-radius:10px;border-width:$linewidth/2;border-color:#cccccc;border-style:solid;margin:$padding;
+        box-sizing: border-box;
+        position:relative;height:$height;
+        .cssFrame {padding:0px 20px;text-align: center;position:relative;
+            height: $height;
+            div {position:absolute;top:50%;transform: translateY(-50%);width:calc(100% - 40px);text-align: center;}
+        }
+        &::after {content:" ";background:#cccccc;position:absolute;top:calc(50% - #{$linewidth/2 });right:-$padding;height:$linewidth;width:$padding;}
+        &::before {content:" ";background:#cccccc;position:absolute;top:calc(50% - #{$linewidth/2 });left:-$padding;height:$linewidth;width:$padding;}
+    }
+
+    
+}

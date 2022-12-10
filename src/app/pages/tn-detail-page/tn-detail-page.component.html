@@ -23,6 +23,14 @@
           [hidden]="isHiddenButton('manage')">
         Manage
       </button>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="tologin()"
+          [hidden]="isNotlogin()">
+        Register to this tournament
+      </button>
   
     </div>
 </div>

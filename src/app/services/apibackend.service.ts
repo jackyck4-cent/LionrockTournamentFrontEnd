@@ -55,8 +55,12 @@ export class ApibackendService {
   private loadToken(): void
   {
     const token = localStorage.getItem('id_token');
-    let authToken = token;
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + authToken);
+    if (token != "" && token != null)
+    {
+    
+      let authToken = token;
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + authToken);
+    }
   }
 
   getTnList(filters: string[]): Observable<any> {
@@ -161,6 +165,17 @@ export class ApibackendService {
   enrollnow(tn_id: string): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/enroll/`+tn_id;
+    return this.http.get(api, this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  removenow(tn_id: string): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/tournments2/remove/`+tn_id;
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {
         return res || {};

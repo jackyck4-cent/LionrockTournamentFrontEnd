@@ -5,6 +5,9 @@
     <app-tn-detail
       [tn_id]="tn_id"
       [config]="tn_detail__displayconfig"
+      (boutChangeEvent)="boutschange($event)" 
+      (infoChangeEvent)="infoChangeEvent($event)" 
+      
       [page_type]="'manage'"
     ></app-tn-detail>
   
@@ -26,7 +29,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="onButton('set_winners')"
+            (click)="onButton('set_winners')" 
             [hidden]="isHiddenButton('set_winners')">
           Set winners
         </button>
