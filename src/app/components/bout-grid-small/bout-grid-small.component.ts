@@ -59,7 +59,7 @@ export class BoutGridSmallComponent implements OnInit {
   }
 
   shouldButtonClickable(round: string) {
-    console.log(this.page_type+"<<");
+    // console.log(this.page_type+"<<");
     if (this.page_type == 'manage' 
         && this.backend.getMyUserId() == this.tn_info.owner
         && round
