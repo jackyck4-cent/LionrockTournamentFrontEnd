@@ -44,7 +44,7 @@ export class TnDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     console.log(`tn-detail-page: tn_id=${this.tn_id}`);
-    // console.log(this.page_type);
+    console.log(this.page_type);
 
     /* 
     Jacky
@@ -72,7 +72,7 @@ export class TnDetailPageComponent implements OnInit {
 
   isHiddenButton(btn: string): boolean {
     if (this.authService.isLoggedIn) {
-      // console.log(`this.backend.getMyUserId() = ${this.backend.getMyUserId()}`)
+      console.log(`this.backend.getMyUserId() = ${this.backend.getMyUserId()}`)
       if (btn == 'manage') {
         if (this.tn_info && this.backend.getMyUserId() == this.tn_info.owner) {
           return false;

@@ -1,14 +1,12 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<div> 
+<div class="w3-card-4"> 
   <header class="w3-container">
-    <div class="page-title">Welcome to Lionrock Tournament</div>
+    <h1> </h1>
+    <div class="page-title">Welcome to Lionrock Tournament Page</div>
   </header>
-  <div class="w3-card-4 w3-container page-content" style="padding:10px; color:#274949">
-    <p>
-      Manage all your tournaments in one place efficiently whatever their structures and matches formats.<br>
-    </p>
-    <p *ngIf="!authService.isLoggedIn">
-      <a routerLink="/sign-up">Become a member</a> to start the journey.<br> 
-    </p>
+  <div class="w3-container">
+    <br>
+    <p class="page-content" style="color:#274949">Manage all your tournaments in one place efficiently whatever their structures and matches formats. <br> <br> </p>
+    <p class="page-content" style="color:#274949">Sign-up to be our member to start the journey.<br> </p>
   </div>
 </div>

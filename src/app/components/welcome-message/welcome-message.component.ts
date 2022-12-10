@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-welcome-message',
@@ -8,7 +7,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class WelcomeMessageComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
