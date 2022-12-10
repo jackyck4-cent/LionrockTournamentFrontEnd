@@ -55,8 +55,12 @@ export class ApibackendService {
   private loadToken(): void
   {
     const token = localStorage.getItem('id_token');
-    let authToken = token;
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + authToken);
+    if (token != "" && token != null)
+    {
+    
+      let authToken = token;
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + authToken);
+    }
   }
 
   getTnList(filters: string[]): Observable<any> {

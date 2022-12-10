@@ -89,6 +89,24 @@ export class TnDetailPageComponent implements OnInit {
     return true;
   }
 
+  isNotlogin(): boolean {
+    if (!this.authService.isLoggedIn) {
+      
+      if (  this.tn_info
+            && this.tn_info.status == 'enrolling'
+      ) 
+        {
+          return false;
+        }
+      
+    }
+    return true;
+  }
+
+  tologin() {
+    this.router.navigate(['log-in']);
+  }
+
   private reloadComponent() {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
