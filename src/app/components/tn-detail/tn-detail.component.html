@@ -73,8 +73,10 @@
     </div>
   </div>
 
-  <div *ngIf="tn_info.status == 'complete'">
-      <app-tree [tn_info]="tn_info">
+  <div *ngIf="tn_info.status == 'completed'">
+      <app-tree [tn_info]="tn_info"
+      [players_info]="players_info"
+      >
       </app-tree>
       
 

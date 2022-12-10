@@ -2,7 +2,7 @@
     <div class="cssTier" *ngIf="tn_info.size == 16 ">
         <div class="cssCells">
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_16']; index as i; first as isFirst">
-                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
             </div>
         </div>
         
@@ -10,21 +10,21 @@
     <div class="cssTier" *ngIf="tn_info.size == 16 || tn_info.size == 8 ">
         <div class="cssCells"  > 
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_8']; index as i; first as isFirst">
-                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
             </div>
         </div>
     </div>
     <div class="cssTier"  >
         <div class="cssCells"  >
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_4']; index as i; first as isFirst">
-                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
             </div>
         </div>
     </div>
     <div class="cssTier">
         <div class="cssCells">
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_2']; index as i; first as isFirst">
-                <div class="cssFrame">{{row[0]}} vs {{row[1]}}</div>
+                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="cssTier">
         <div class="cssCells">
             <div class="cssCell" >
-                <div class="cssFrame">Champion : {{tn_info.bouts['_2'][0][2]}}</div>
+                <div class="cssFrame"><div>Champion<br />{{getUserName(tn_info.bouts['_2'][0][2])}}</div></div>
             </div>
         </div>
     </div>
