@@ -1,6 +1,8 @@
 <div class="auth-wrapper container ">
   <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-    <h3 class="h3 mb-3 font-weight-normal text-center">Please login in</h3>
+    <div class="page-title">Login</div>
+    <!-- <h3 class="h3 mb-3 font-weight-normal">Please login</h3> -->
+    <br>
     <div class="form-group">
       <label>Username</label>
       <input
@@ -11,6 +13,7 @@
         required
       />
     </div>
+    <br>
     <div class="form-group">
       <label>Password</label>
       <input
@@ -20,6 +23,7 @@
         placeholder="Password"
       />
     </div>
+    <br>
     <button type="submit" class="btn btn-block btn-primary">Sign in</button>
   </form>
 </div>

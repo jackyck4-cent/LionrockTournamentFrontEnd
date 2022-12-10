@@ -32,12 +32,12 @@ export class SignupComponent implements OnInit {
       //console.log(res);
       if (res.status == 1) {
         this.signupForm.reset();
-        alert("Registeration complete");
+        alert("Registration is completed");
         this.router.navigate(['log-in']);
       }
       else if (res.status == 2)
       {
-        alert("User already exist");
+        alert("User already exists");
       }
       else 
       {
