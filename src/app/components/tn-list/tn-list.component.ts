@@ -50,7 +50,7 @@ export class TnListComponent implements OnInit, AfterViewInit {
       */
 //     console.log(filters)
       if (this.latest == "yes")
-        filters.push('latest');
+        filters = ['latest'];
       this.apibackend.getTnFullList(filters).subscribe(
         (res) => {
           //console.log(res);
