@@ -2,7 +2,13 @@
     <div class="cssTier" *ngIf="tn_info.size == 16 ">
         <div class="cssCells">
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_16']; index as i; first as isFirst">
-                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
+                <div class="cssFrame">
+                    <div>
+                        <span [ngClass]="getUserNameCssClasses(row[0], '_16', i)">{{getUserName(row[0])}}</span> 
+                        <br />vs<br />
+                        <span [ngClass]="getUserNameCssClasses(row[1], '_16', i)">{{getUserName(row[1])}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -12,9 +18,9 @@
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_8']; index as i; first as isFirst">
                 <div class="cssFrame">
                     <div>
-                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <span [ngClass]="getUserNameCssClasses(row[0], '_8', i)">{{getUserName(row[0])}}</span> 
                         <br />vs<br />
-                        <span class="username-font">{{getUserName(row[1])}}</span>
+                        <span [ngClass]="getUserNameCssClasses(row[1], '_8', i)">{{getUserName(row[1])}}</span>
                     </div>
                 </div>
             </div>
@@ -25,9 +31,9 @@
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_4']; index as i; first as isFirst">
                 <div class="cssFrame">
                     <div>
-                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <span [ngClass]="getUserNameCssClasses(row[0], '_4', i)">{{getUserName(row[0])}}</span> 
                         <br />vs<br />
-                        <span class="username-font">{{getUserName(row[1])}}</span>
+                        <span [ngClass]="getUserNameCssClasses(row[1], '_4', i)">{{getUserName(row[1])}}</span>
                     </div>
                 </div>
             </div>
@@ -38,9 +44,9 @@
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_2']; index as i; first as isFirst">
                 <div class="cssFrame">
                     <div>
-                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <span [ngClass]="getUserNameCssClasses(row[0], '_2', i)">{{getUserName(row[0])}}</span> 
                         <br />vs<br />
-                        <span class="username-font">{{getUserName(row[1])}}</span>
+                        <span [ngClass]="getUserNameCssClasses(row[1], '_2', i)">{{getUserName(row[1])}}</span>
                     </div>
                 </div>
             </div>
@@ -53,7 +59,7 @@
                 <div class="cssFrame">
                     <div>
                         <img src="/assets/images/trophy.png" height="30px"><i>Champion</i>  <br />
-                        <span class="username-font">{{getUserName(tn_info.bouts['_2'][0][2])}}</span>
+                        <span [ngClass]="getUserNameCssClasses('champion', '', 0)">{{getUserName(tn_info.bouts['_2'][0][2])}}</span>
                     </div>
                 </div>
             </div>

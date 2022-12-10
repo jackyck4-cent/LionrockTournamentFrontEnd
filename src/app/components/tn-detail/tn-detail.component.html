@@ -1,4 +1,5 @@
 <div>
+
   <form class="tn-detail-form">
 
     <mat-form-field class="tn-detail-full-width" [hidden]="config.hidden.includes('name')" >
@@ -58,27 +59,27 @@
 
   <!-- <button mat-raised-button color="accent" (click)="onTestButton()">Test: print tn_info</button> -->
 
-  <div *ngIf="tn_info.status != 'draft'">
-    <div [hidden]="config.hidden.includes('players')">
-      <app-bout-grid-small 
-        [config]="config" 
-        [show_player_list]="isShowPlayerList()"
-        [tn_info]="tn_info"
-        [players_info]="players_info"
-        (newItemEvent)="boutschange($event)" 
-        [page_type]="this.page_type"
-      >
-      
-      </app-bout-grid-small>
+  <div *ngIf="tn_info.status == 'completed'; else not_yet_completed">
+    <app-tree [tn_info]="tn_info"
+    [players_info]="players_info"
+    >
+    </app-tree>
+  </div>
+  <ng-template #not_yet_completed>
+    <div *ngIf="tn_info.status != 'draft'">
+      <div [hidden]="config.hidden.includes('players')">
+        <app-bout-grid-small 
+          [config]="config" 
+          [show_player_list]="isShowPlayerList()"
+          [tn_info]="tn_info"
+          [players_info]="players_info"
+          (newItemEvent)="boutschange($event)" 
+          [page_type]="this.page_type"
+        >
+        
+        </app-bout-grid-small>
+      </div>
     </div>
-  </div>
+  </ng-template>
 
-  <div *ngIf="tn_info.status == 'completed'">
-      <app-tree [tn_info]="tn_info"
-      [players_info]="players_info"
-      >
-      </app-tree>
-      
-
-  </div>
 </div>

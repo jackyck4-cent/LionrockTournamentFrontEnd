@@ -68,7 +68,9 @@ export class AuthService {
             //this.router.navigate(["user-profile/" + res.msg._id]);
           });
           */
-          this.router.navigate(["profile"]);
+          
+          //this.router.navigate(["profile"]);
+          this.router.navigate(["tn-list"]);
         }
         else
           alert("Login / password incorrect");

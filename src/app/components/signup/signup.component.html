@@ -4,7 +4,11 @@
     [formGroup]="signupForm"
     (ngSubmit)="registerUser()"
   >
-    <h3 class="h3 mb-3 font-weight-normal text-center">Please register</h3>
+    
+    <div class="page-title">Become a member</div>
+    <br>
+    <!-- <h3 class="h3 mb-3 font-weight-normal text-center">Please register</h3> -->
+
     <div class="form-group">
       <label>Display Name</label>
       <input
@@ -15,6 +19,7 @@
         required
       />
     </div>
+    <br>
     <div class="form-group">
       <label>Username</label>
       <input
@@ -25,8 +30,9 @@
         required
       />
     </div>
+    <br>
     <div class="form-group">
-      <label>Email address</label>
+      <label>Email</label>
       <input
         type="email"
         class="form-control"
@@ -35,6 +41,7 @@
         required
       />
     </div>
+    <br>
     <div class="form-group">
       <label>Password</label>
       <input
@@ -45,6 +52,7 @@
         required
       />
     </div>
+    <br>
     <button type="submit" class="btn btn-block btn-primary">Sign up</button>
   </form>
 </div>
