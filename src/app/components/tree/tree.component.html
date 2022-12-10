@@ -7,24 +7,42 @@
         </div>
         
     </div>
-    <div class="cssTier" *ngIf="tn_info.size == 16 || tn_info.size == 8 ">
+    <div class="cssTier" *ngIf="tn_info.size >= 8 ">
         <div class="cssCells"  > 
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_8']; index as i; first as isFirst">
-                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
+                <div class="cssFrame">
+                    <div>
+                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <br />vs<br />
+                        <span class="username-font">{{getUserName(row[1])}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="cssTier"  >
+    <div class="cssTier" *ngIf="tn_info.size >= 4 ">
         <div class="cssCells"  >
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_4']; index as i; first as isFirst">
-                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
+                <div class="cssFrame">
+                    <div>
+                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <br />vs<br />
+                        <span class="username-font">{{getUserName(row[1])}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="cssTier">
+    <div class="cssTier" *ngIf="tn_info.size >= 2 ">
         <div class="cssCells">
             <div class="cssCell" *ngFor="let row of tn_info.bouts['_2']; index as i; first as isFirst">
-                <div class="cssFrame"><div>{{getUserName(row[0])}}<br />vs<br />{{getUserName(row[1])}}</div></div>
+                <div class="cssFrame">
+                    <div>
+                        <span class="username-font">{{getUserName(row[0])}}</span> 
+                        <br />vs<br />
+                        <span class="username-font">{{getUserName(row[1])}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,7 +50,12 @@
     <div class="cssTier">
         <div class="cssCells">
             <div class="cssCell" >
-                <div class="cssFrame"><div>Champion<br />{{getUserName(tn_info.bouts['_2'][0][2])}}</div></div>
+                <div class="cssFrame">
+                    <div>
+                        <img src="/assets/images/trophy.png" height="30px"><i>Champion</i>  <br />
+                        <span class="username-font">{{getUserName(tn_info.bouts['_2'][0][2])}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
