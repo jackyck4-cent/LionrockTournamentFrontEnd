@@ -71,16 +71,19 @@ export class TnDetailPageComponent implements OnInit {
   }
 
   isHiddenButton(btn: string): boolean {
-    if (btn == 'manage') {
-      if (this.tn_info && this.backend.getMyUserId() == this.tn_info.owner) {
-        return false;
-      }
-    } else if (btn == 'register') {
-      if (this.backend.getMyUserId()
-          && this.tn_info
-          && this.tn_info.status == 'enrolling'
-          && !this.tn_info.players.includes(this.backend.getMyUserId())) {
-        return false;
+    if (this.authService.isLoggedIn) {
+      console.log(`this.backend.getMyUserId() = ${this.backend.getMyUserId()}`)
+      if (btn == 'manage') {
+        if (this.tn_info && this.backend.getMyUserId() == this.tn_info.owner) {
+          return false;
+        }
+      } else if (btn == 'register') {
+        if (this.backend.getMyUserId()
+            && this.tn_info
+            && this.tn_info.status == 'enrolling'
+            && !this.tn_info.players.includes(this.backend.getMyUserId())) {
+          return false;
+        }
       }
     }
     return true;
@@ -94,19 +97,21 @@ export class TnDetailPageComponent implements OnInit {
   }
 
   onButton(btn: string) {
-    console.log(`Clicked "${btn}" button`);
-    if (btn == 'register') {
-      this.backend.registerTn(this.tn_id).subscribe((res) => {
-        if (res.status == 1) {
-          this.reloadComponent();
-        } else {
-          alert(`Failed to register to the tournament: status=${res.status}`);
-        }
-      });
+    if (this.authService.isLoggedIn) {
+      console.log(`Clicked "${btn}" button`);
+      if (btn == 'register') {
+        this.backend.registerTn(this.tn_id).subscribe((res) => {
+          if (res.status == 1) {
+            this.reloadComponent();
+          } else {
+            alert(`Failed to register to the tournament: status=${res.status}`);
+          }
+        });
 
-    } else if (btn == 'manage') {
-      console.log('Go to tn-manage-page');
-      this.router.navigate([`tn-manage/${this.tn_id}`]);
+      } else if (btn == 'manage') {
+        console.log('Go to tn-manage-page');
+        this.router.navigate([`tn-manage/${this.tn_id}`]);
+      }
     }
   }
 }

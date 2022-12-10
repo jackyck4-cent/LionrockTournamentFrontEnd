@@ -4,6 +4,7 @@ import { DisplayConfig } from 'src/app/shared/displayconfig';
 import { TnInfo } from 'src/app/shared/tn_info';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { ApibackendService } from 'src/app/services/apibackend.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-tn-create-page',
@@ -25,6 +26,7 @@ export class TnCreatePageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
     private backend: ApibackendService,
+    public authService: AuthService,
     private router:Router) {
     
       this.tn_info.status = 'draft';
@@ -37,6 +39,14 @@ export class TnCreatePageComponent implements OnInit {
     if id not provided => create new tournment
     If id provided => check existance and modify tournment
     */
+
+    if (!this.authService.isLoggedIn) {
+      // go to tn-list page if not yet login
+      this.router.navigate(['tn-list']);
+      return;
+    }
+
+
     this.tn_id = this.route.snapshot.paramMap.get('id') ?? '';
     
     this.page_title = this.tn_id? 'Modify Tournament': 'Create New Tournament';
@@ -59,13 +69,15 @@ export class TnCreatePageComponent implements OnInit {
   }
 
   isHiddenButton(btn: string): boolean {
-    if (btn == 'create') {
-      return this.tn_id != '';  // hide buttons except tn_id == 0
+    if (this.authService.isLoggedIn) {
+        if (btn == 'create') {
+        return !(this.tn_id == '');  // hide buttons except tn_id == 0
+      }
+      if (btn == 'update') {
+        return !(this.tn_id != '');  // hide buttons except tn_id != 0
+      }
     }
-    if (btn == 'update') {
-      return this.tn_id == '';  // hide buttons except tn_id != 0
-    }
-    return false;
+    return true;
   }
 
   isDisabledButton(btn: string) {
@@ -76,26 +88,28 @@ export class TnCreatePageComponent implements OnInit {
   }
 
   onButton(btn: string) {
-    console.log(`onButton("${btn}")`);
-    if (btn == 'update' && this.tn_info) {
-      console.log(`this.tn_info = ${JSON.stringify(this.tn_info)}`);
-      this.backend.updateTn(this.tn_info, this.tn_id).subscribe((res) => {
-        if (res.status == 1) {
-          // done update, go to tn-manage-page
-          this.router.navigate([`tn-manage/${this.tn_id}`]);
-        }
-      });
+    if (this.authService.isLoggedIn) {
+      console.log(`onButton("${btn}")`);
+      if (btn == 'update' && this.tn_info) {
+        console.log(`this.tn_info = ${JSON.stringify(this.tn_info)}`);
+        this.backend.updateTn(this.tn_info, this.tn_id).subscribe((res) => {
+          if (res.status == 1) {
+            // done update, go to tn-manage-page
+            this.router.navigate([`tn-manage/${this.tn_id}`]);
+          }
+        });
 
-    } else if (btn == 'create' && !this.tn_id) {
-      console.log(`tn-create-page: create-button: tn_info = ${JSON.stringify(this.tn_info)}`);
-      this.backend.createTn(this.tn_info).subscribe((res) => {
-        if (res.status == 1) {
-          alert('Tournament created');
-          this.router.navigate(['tn-list']);
-        } else {
-          alert(`Failed to create tournament: ${res.message}`);
-        }
-      });
+      } else if (btn == 'create' && !this.tn_id) {
+        console.log(`tn-create-page: create-button: tn_info = ${JSON.stringify(this.tn_info)}`);
+        this.backend.createTn(this.tn_info).subscribe((res) => {
+          if (res.status == 1) {
+            alert('Tournament created');
+            this.router.navigate(['tn-list']);
+          } else {
+            alert(`Failed to create tournament: ${res.message}`);
+          }
+        });
+      }
     }
   }
 
