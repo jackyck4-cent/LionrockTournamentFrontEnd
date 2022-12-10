@@ -2,10 +2,27 @@
 
 <div class="container">
   <div class="page-title">User Profile</div>
+  <br>
+  <form class="profile-form">
+    <mat-form-field class="profile-full-width" >
+      <mat-label>User ID</mat-label> 
+      <input matInput name="user_id" readonly value="{{ this.currentUser.username }}"/>
+    </mat-form-field>
+    <mat-form-field class="profile-full-width" >
+      <mat-label>Name</mat-label> 
+      <input matInput name="display_name" readonly value="{{ this.currentUser.display_name }}"/>
+    </mat-form-field>
+    <mat-form-field class="profile-full-width" >
+      <mat-label>Email</mat-label> 
+      <input matInput name="email" readonly value="{{ this.currentUser.email }}"/>
+    </mat-form-field>
+  </form>
 
+  <!--
   <div>
     <p><strong>User Name:</strong> {{ this.currentUser.username }}</p>
     <p><strong>Display Name:</strong> {{ this.currentUser.display_name }}</p>
     <p><strong>Email:</strong> {{ this.currentUser.email }}</p>
   </div>
+  -->
 </div>
