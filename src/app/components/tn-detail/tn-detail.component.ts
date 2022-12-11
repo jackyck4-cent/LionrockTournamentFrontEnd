@@ -108,6 +108,12 @@ export class TnDetailComponent implements OnInit {
     this.boutChangeEvent.emit(info);
   }
 
+  changeValSize(val:any)
+  {
+    this.tn_info.size = val;
+    this.infoChangeEvent.emit(JSON.stringify(this.tn_info));
+  }
+
   changeVal(evt:any)
   {
     console.log("CV"+JSON.stringify(this.tn_info))

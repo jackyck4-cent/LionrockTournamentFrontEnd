@@ -28,9 +28,9 @@
       <div [hidden]="config.hidden.includes('size')">
         <mat-label>Size </mat-label>
         <mat-radio-group name="tn_info__size" [(ngModel)]="tn_info.size" >
-          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="4">4</mat-radio-button>
-          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="8">8</mat-radio-button>
-          <mat-radio-button (click)="changeVal($event)" class="tn-info--size" [value]="16">16</mat-radio-button>
+          <mat-radio-button (click)="changeValSize(4)" class="tn-info--size" [value]="4">4</mat-radio-button>
+          <mat-radio-button (click)="changeValSize(8)" class="tn-info--size" [value]="8">8</mat-radio-button>
+          <mat-radio-button (click)="changeValSize(16)" class="tn-info--size" [value]="16">16</mat-radio-button>
         </mat-radio-group>
       </div>
     </ng-template>
