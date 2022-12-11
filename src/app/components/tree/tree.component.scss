@@ -30,8 +30,6 @@ $linewidth:2px;
         &:nth-child(1) {
             .cssCell {
                 &::before {display:none !important;}
-
-               
             }
 
             .cssCells > .cssCell:nth-child(2n+1) 
@@ -47,12 +45,7 @@ $linewidth:2px;
             .cssCell {
                 margin-top:$height * 0 ;
                 margin-bottom:( $height * 1.5 + $padding * -1 );
-            }
-
-           
-
-           
-            
+            }            
         }
         &:nth-child(3) {
             position: relative;
@@ -102,32 +95,22 @@ $linewidth:2px;
                     &::after {display:none;width:$padding+$linewidth;}
                 }
             }
-        }
-
-        
+        }        
     }
 
     &.tree_16 {
         .cssTier:nth-child(2) {
-           
-      
-
             .cssCell:nth-child(2n+1) 
             {
                @extend .bline2;
             }
-            
         }
 
         .cssTier:nth-child(3) {
-           
-      
-
             .cssCell:nth-child(2n+1) 
             {
                @extend .bline3;
             }
-            
         }
     }
 
@@ -214,12 +197,7 @@ $linewidth:2px;
         }
     }
 
-    .cssCells {
-        /*osition: absolute;top:50%;transform: translateY(-50%);*/width:100%;
-        /*
-        &::after {display:none;content:" ";background:#cccccc;position:absolute;top:$padding+$height/2 - $linewidth / 2 ;right:-$linewidth/2;width:$linewidth;height:calc(100% - #{2 * $padding+$height - $linewidth } )}
-        */
-    }
+    
     .cssCell {border-radius:10px;border-width:$linewidth/2;border-color:#cccccc;border-style:solid;margin:$padding;
         box-sizing: border-box;
         position:relative;height:$height;
@@ -233,8 +211,6 @@ $linewidth:2px;
 
     
 }
-
-
 
 .username-font {
     font-family: 'Abel', sans-serif;

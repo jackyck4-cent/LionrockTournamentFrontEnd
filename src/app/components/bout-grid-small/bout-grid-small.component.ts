@@ -77,7 +77,7 @@ export class BoutGridSmallComponent implements OnInit {
       this.change.markForCheck();
       
       
-   }, 2000 ) ;
+   }, 1000 ) ;
   }
 
   getUserName(user_id: string): string {
