@@ -78,6 +78,17 @@ export class AuthService {
       });
   }
 
+  changeuser(data: any): Observable<any> {
+    this.loadToken();
+    let api = `${this.endpoint}/users/change`;
+    return this.http.post(api , data , this.httpOptions ).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   getToken() {
     return localStorage.getItem("access_token");
   }

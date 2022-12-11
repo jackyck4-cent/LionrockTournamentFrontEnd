@@ -3,19 +3,31 @@
 <div class="container">
   <div class="page-title">User Profile</div>
   <br>
-  <form class="profile-form">
+  <form class="profile-form" [formGroup]="signupForm" (ngSubmit)="saveprofile()" >
     <mat-form-field class="profile-full-width" >
       <mat-label>User ID</mat-label> 
-      <input matInput name="user_id" readonly value="{{ this.currentUser.username }}"/>
+      <input matInput formControlName="reference" readonly />
+    </mat-form-field>
+    <mat-form-field class="profile-full-width" >
+      <mat-label>User Name</mat-label> 
+      <input matInput formControlName="username" readonly />
     </mat-form-field>
     <mat-form-field class="profile-full-width" >
       <mat-label>Name</mat-label> 
-      <input matInput name="display_name" readonly value="{{ this.currentUser.display_name }}"/>
+      <input matInput formControlName="display_name"  />
     </mat-form-field>
     <mat-form-field class="profile-full-width" >
       <mat-label>Email</mat-label> 
-      <input matInput name="email" readonly value="{{ this.currentUser.email }}"/>
+      <input matInput formControlName="email"  />
     </mat-form-field>
+
+    <button
+        type="submit"    
+        mat-raised-button
+        color="primary"
+      >
+      save
+    </button>
   </form>
 
   <!--
