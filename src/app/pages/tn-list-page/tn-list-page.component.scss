@@ -1,19 +1,26 @@
-.button-row {
-    display: table-cell;
-    max-width: 600px;
-}
-
-.toggle-buttons {
-    color: black;
-    margin: 0px 5px;
-    border-radius: 18px;
-    padding: 2px 2px;
-}
-// .toggle-buttons:hover {
-//     background-color: green;
-// }
-.toggle-buttons:checked {
-    background-color: red;
-}
-
 .container {padding:0 0 30px}
+
+
+mat-button-toggle-group {
+    border: none;
+}
+
+.mat-button-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+
+    margin: 0px 5px;
+    border-radius: 30px;
+    padding: 2px 2px;
+
+    background-color: lightgray;
+    color: #ffffff;
+}
+
+
+.mat-button-toggle-checked {
+    background-color: rgb(54, 120, 206);
+    color: black !important;
+}

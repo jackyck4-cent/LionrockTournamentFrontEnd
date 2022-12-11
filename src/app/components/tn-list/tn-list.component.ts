@@ -32,41 +32,43 @@ export class TnListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('tn-list: ngOnInit()');
 
-    // [this.all_players_info, this.all_tn_info] = this.backend.getTnList(['all']);
-    // this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
     this.filterService.filterHasChanged().subscribe((filters: string[]) => {
-      // this.filters = filters;
-      
-      // [this.all_players_info, this.all_tn_info] = this.backend.getTnList(filters)
-      // console.log(this.all_players_info);
-
       /*
       Jacky
       Change to ajax call also provide token
       if it is logged user , tab menu exist for filtering
       if it is non-logged , disaply only publish tournment
       */
-//     console.log(filters)
-      if (this.latest == "yes")
+      if (this.latest == "yes") {
         filters = ['latest'];
-      this.apibackend.getTnFullList(filters).subscribe(
-        (res) => {
-          //console.log(res);
-          if (res.status == 1 )
-          {
-            this.all_players_info = new Map(Object.entries(res.data.players))
-            this.all_tn_info = new Map(Object.entries(res.data.tournaments));
-            this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
-            this.dataSource.sort = this.sort;
+      }
+      console.log(`filterHasChanged(): filters = ${filters}`);
 
-            //console.log("tn-list: ngOnInit()" + JSON.stringify(res.data));
-          }
+      this.apibackend.getTnFullList(filters).subscribe((res) => {
+        if (res.status == 1) {
+          console.log(`return from getTnFullList(${filters})`);
+          console.log(res.data.players);
+          console.log(res.data.tournaments);
+          this.all_players_info = new Map(Object.entries(res.data.players))
+          this.all_tn_info = new Map(Object.entries(res.data.tournaments));
+          console.log(`return from getTnFullList(${filters}): size=${this.all_tn_info.size}`);
+
+          // if (filters.includes('latest') || filters.includes('all')) {
+          //   this.all_tn_info = new Map(Object.entries(res.data.tournaments));
+          // } else {
+          //   this.all_tn_info = new Map<string, TnInfo>();
+          //   for (const prop in res.data.tournaments) {
+          //     let tn_info = <TnInfo> res.data.tournaments[prop];
+          //     if (filters.includes(tn_info.status)) {
+          //       this.all_tn_info.set(prop, tn_info);
+          //     }
+          //   }
+          // }
+          this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+          this.dataSource.sort = this.sort;
         }
-      );
-
-      
+      });
     });
     this.filterService.change(['all']);
   }
@@ -107,10 +109,10 @@ export class TnListComponent implements OnInit, AfterViewInit {
         
       case 'started':
         switch (tn_info.current_round) {
-          case '_2': return 'Final';
-          case '_4': return 'Semi-final';
-          case '_8': return 'Quarter-final';
-          case '_16': return 'Round of 16';
+          case '_2': return 'Started (Final)';
+          case '_4': return 'Started (Semi-final)';
+          case '_8': return 'Started (Quarter-final)';
+          case '_16': return 'Started (Round of 16)';
         }
         return '';
       case 'completed':
