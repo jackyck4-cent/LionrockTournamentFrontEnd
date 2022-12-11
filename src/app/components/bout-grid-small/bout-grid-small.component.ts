@@ -43,41 +43,42 @@ export class BoutGridSmallComponent implements OnInit {
     var that = this;
     window.setTimeout(()=>{
 
-      console.log(that);
-      console.log(that.tn_info.current_round);
+      console.log(this.tn_info.size);
+      console.log(this.tn_info.current_round);
       switch (this.tn_info.size)
       {
         case 4:
+          
           if (this.tn_info.current_round == "_2" )
-            this.selectedIndex = 2;
-          else
             this.selectedIndex = 1;
+          else
+            this.selectedIndex = 0;
           break;
 
         case 8:
           if (this.tn_info.current_round == "_2" )
-            this.selectedIndex = 3;
-          else if (this.tn_info.current_round == "_4" )
             this.selectedIndex = 2;
-          else 
+          else if (this.tn_info.current_round == "_4" )
             this.selectedIndex = 1;
+          else 
+            this.selectedIndex = 0;
           break;
 
         case 16:
           if (this.tn_info.current_round == "_2" )
-            this.selectedIndex = 4;
-          else if (this.tn_info.current_round == "_4" )
             this.selectedIndex = 3;
-            else if (this.tn_info.current_round == "_8" )
+          else if (this.tn_info.current_round == "_4" )
             this.selectedIndex = 2;
-          else 
+            else if (this.tn_info.current_round == "_8" )
             this.selectedIndex = 1;
+          else 
+            this.selectedIndex = 0;
           break;
       }
       this.change.markForCheck();
       
       
-   }, 1000 ) ;
+   }, 200 ) ;
   }
 
   getUserName(user_id: string): string {
