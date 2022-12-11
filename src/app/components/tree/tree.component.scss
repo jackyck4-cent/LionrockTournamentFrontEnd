@@ -2,6 +2,26 @@ $height:108px;
 $padding:20px;
 $linewidth:2px;
 
+.bline {
+    .cssFrame::before {
+        content:" ";background:#cccccc;position:absolute;top:50%;
+        width:$linewidth;height:calc(100% + $padding);display:block;right:-$padding;
+    }
+}
+
+.bline2 {
+    .cssFrame::before {
+        content:" ";background:#cccccc;position:absolute;top:50%;
+        width:$linewidth;height:calc(200% + $padding + $linewidth * 6);display:block;right:-$padding;
+    }
+}
+
+.bline3 {
+    .cssFrame::before {
+        content:" ";background:#cccccc;position:absolute;top:50%;
+        width:$linewidth;height:calc(400% + $padding * 4 + $linewidth * 4);display:block;right:-$padding;
+    }
+}
 
 .cssTiers {display:flex;
     
@@ -10,6 +30,13 @@ $linewidth:2px;
         &:nth-child(1) {
             .cssCell {
                 &::before {display:none !important;}
+
+               
+            }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline;
             }
             
         }
@@ -25,6 +52,11 @@ $linewidth:2px;
             .cssCells {
                 &::after {top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 7 + $padding * 0 - $linewidth * 2 )  }
             }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline2;
+            }
             
         }
         &:nth-child(3) {
@@ -38,6 +70,11 @@ $linewidth:2px;
 
             .cssCells {
                 &::after {top:$height * 0.5 - $linewidth * 0.5 ;height:($height * 5 + $padding * -0.5 - $linewidth * 4 )  }
+            }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline3;
             }
             
         }
@@ -78,12 +115,19 @@ $linewidth:2px;
         
     }
 
+    
+
     &.tree_8 {
         height:$height*4+$padding*5;
         .cssTier:nth-child(1) {
            
             .cssCells {
                 &::after {height:($height * 3.5 + $padding * 0 + $linewidth * 4 );  }
+            }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline;
             }
             
         }
@@ -92,6 +136,11 @@ $linewidth:2px;
            
             .cssCells {
                 &::after {height:($height * 2.5 + $padding * -0.5 - $linewidth * 4 ) ;}
+            }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline2;
             }
             
         }
@@ -124,6 +173,11 @@ $linewidth:2px;
             .cssCells {
                 &::after {height:($height * 1 + $padding * 0.5 + $linewidth * 6 ) ;}
             }
+
+            .cssCell:nth-child(2n+1) 
+            {
+               @extend .bline;
+            }
             
         }
         .cssTier:nth-child(2) {
@@ -148,7 +202,7 @@ $linewidth:2px;
 
     .cssCells {
         /*osition: absolute;top:50%;transform: translateY(-50%);*/width:100%;
-        &::after {content:" ";background:#cccccc;position:absolute;top:$padding+$height/2 - $linewidth / 2 ;right:-$linewidth/2;width:$linewidth;height:calc(100% - #{2 * $padding+$height - $linewidth } )}
+        &::after {display:none;content:" ";background:#cccccc;position:absolute;top:$padding+$height/2 - $linewidth / 2 ;right:-$linewidth/2;width:$linewidth;height:calc(100% - #{2 * $padding+$height - $linewidth } )}
     }
     .cssCell {border-radius:10px;border-width:$linewidth/2;border-color:#cccccc;border-style:solid;margin:$padding;
         box-sizing: border-box;
