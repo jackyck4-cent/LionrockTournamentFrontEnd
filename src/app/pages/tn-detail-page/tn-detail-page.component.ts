@@ -95,6 +95,7 @@ export class TnDetailPageComponent implements OnInit {
       
       if (  this.tn_info
             && this.tn_info.status == 'enrolling'
+            && this.tn_info.players.length < this.tn_info.size
       ) 
         {
           return false;
