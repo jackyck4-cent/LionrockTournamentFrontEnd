@@ -24,7 +24,7 @@ $linewidth:2px;
 }
 
 .cssTiers {display:flex;
-    
+   min-width:1200px;
     .cssTier {position:relative;width:20%;height:($padding + $height) * 8 + $padding;
         height:$height*8+$padding*9;
         &:nth-child(1) {
