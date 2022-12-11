@@ -28,6 +28,7 @@
       <button
           mat-raised-button
           color="primary"
+          [disabled]="ifChangedBouts()"
           (click)="onButton('next_round')"
           [hidden]="isHiddenButton('next_round')">
         Proceed to Next Round
