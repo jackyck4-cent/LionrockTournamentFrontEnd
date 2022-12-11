@@ -24,6 +24,7 @@ export class TnManagePageComponent implements OnInit {
   players_info!: Map<string, PlayerInfo>;
   state_winner : boolean = false;
   private prev_bouts: string = '';
+  private round_tab: string = '';
 
   /*
   Jacky 
@@ -52,7 +53,7 @@ export class TnManagePageComponent implements OnInit {
         if (res.status == 1) {
           this.tn_info = <TnInfo> res.data ?? {};
           this.updatePrevBoutsStr();
-          console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
+          // console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
         }
       });
     }
@@ -115,9 +116,9 @@ export class TnManagePageComponent implements OnInit {
         case 'start_game':
           return !(this.tn_info.status == 'enrolling' && this.tn_info.size == this.tn_info.players.length);
         case 'set_winners':
-          return !(this.tn_info.status == 'started');
+          return !(this.tn_info.status == 'started' && this.tn_info.current_round == this.round_tab);
         case 'next_round':
-          return !(this.tn_info.status == 'started' && this.hasMarkedAllWinners());
+          return !(this.tn_info.status == 'started' && this.tn_info.current_round == this.round_tab && this.hasMarkedAllWinners());
         case 'modify':
           return !(this.tn_info.owner == this.backend.getMyUserId());
         case 'delete':
@@ -150,9 +151,6 @@ export class TnManagePageComponent implements OnInit {
           });
           break;
         case 'set_winners':
-          //console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
-          //alert("1");
-          //alert(`Not yet implemented: "${btn}" button`);
           this.backend.setRoundWinners(this.tn_id , this.tn_info).subscribe((res) => {
             if (res.status == 1) {
               this.updatePrevBoutsStr();
@@ -164,7 +162,6 @@ export class TnManagePageComponent implements OnInit {
           });
           break;
         case 'next_round':
-          //alert(`Not yet implemented: "${btn}" button`);
           this.backend.goNextRoundTn(this.tn_id).subscribe((res) => {
             if (res.status == 1) {
               this.tn_info = (res.data)
@@ -181,7 +178,6 @@ export class TnManagePageComponent implements OnInit {
           if (confirm('Are you sure to delete this tournament?')) {
             this.backend.removenow(this.tn_id).subscribe((res) => {
               if (res.status == 1) {
-                //this.reloadComponent();
                 alert('Tournament is deleted');
                 this.router.navigate(['tn-list']);
               } else {
@@ -196,7 +192,6 @@ export class TnManagePageComponent implements OnInit {
 
   boutschange(info:string)
   {
-    //alert(info)
     let infodata = info.split("+");
     let bouts = this.tn_info.bouts[infodata[0]];
     for (var i=0;i<bouts.length;i++)
@@ -207,9 +202,6 @@ export class TnManagePageComponent implements OnInit {
         this.tn_info.bouts[infodata[0]][i][2] = infodata[1]
        }
     }
-    //alert(round+" "+user_id);
-    //console.log(`clicked... Round ${round} / User ${user_id}`);
-    
   }
 
   infoChangeEvent(info:string)
@@ -222,5 +214,9 @@ export class TnManagePageComponent implements OnInit {
     console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
   }
 
+
+  onRoundTabChange(round: string) {
+    this.round_tab = round;
+  }
 }
  

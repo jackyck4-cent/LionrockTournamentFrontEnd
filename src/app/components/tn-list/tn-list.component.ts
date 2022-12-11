@@ -3,7 +3,6 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { TnInfo } from 'src/app/shared/tn_info';
-import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnListFilterServiceService } from 'src/app/services/tn-list-filter-service.service';
 import { ApibackendService } from '../../services/apibackend.service';
@@ -24,7 +23,7 @@ export class TnListComponent implements OnInit, AfterViewInit {
   private all_players_info!: Map<string, PlayerInfo>;
   private all_tn_info!: Map<string, TnInfo>;
  
-  constructor(private backend: BackendService, 
+  constructor(
     private filterService: TnListFilterServiceService,
     private _liveAnnouncer: LiveAnnouncer,
     private apibackend:ApibackendService
@@ -47,26 +46,12 @@ export class TnListComponent implements OnInit, AfterViewInit {
 
       this.apibackend.getTnFullList(filters).subscribe((res) => {
         if (res.status == 1) {
-          console.log(`return from getTnFullList(${filters})`);
-          console.log(res.data.players);
-          console.log(res.data.tournaments);
-          this.all_players_info = new Map(Object.entries(res.data.players))
-          this.all_tn_info = new Map(Object.entries(res.data.tournaments));
-          console.log(`return from getTnFullList(${filters}): size=${this.all_tn_info.size}`);
-
-          // if (filters.includes('latest') || filters.includes('all')) {
-          //   this.all_tn_info = new Map(Object.entries(res.data.tournaments));
-          // } else {
-          //   this.all_tn_info = new Map<string, TnInfo>();
-          //   for (const prop in res.data.tournaments) {
-          //     let tn_info = <TnInfo> res.data.tournaments[prop];
-          //     if (filters.includes(tn_info.status)) {
-          //       this.all_tn_info.set(prop, tn_info);
-          //     }
-          //   }
-          // }
-          this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
-          this.dataSource.sort = this.sort;
+          if (res.data.players && res.data.tournaments) {
+            this.all_players_info = new Map(Object.entries(res.data.players))
+            this.all_tn_info = new Map(Object.entries(res.data.tournaments));
+            this.dataSource = new MatTableDataSource(Array.from(this.all_tn_info.values()));
+            this.dataSource.sort = this.sort;
+          }
         }
       });
     });
@@ -80,10 +65,6 @@ export class TnListComponent implements OnInit, AfterViewInit {
   }
 
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {

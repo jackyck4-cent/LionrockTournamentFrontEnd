@@ -27,6 +27,7 @@ export class TnDetailComponent implements OnInit {
 
   @Output() boutChangeEvent = new EventEmitter<string>();
   @Output() infoChangeEvent = new EventEmitter<string>();
+  @Output() roundTabChangeEvent = new EventEmitter<string>();
 
   constructor(private route: ActivatedRoute, 
       private backend: ApibackendService) {
@@ -118,5 +119,9 @@ export class TnDetailComponent implements OnInit {
   {
     console.log("CV"+JSON.stringify(this.tn_info))
     this.infoChangeEvent.emit(JSON.stringify(this.tn_info));
+  }
+
+  onRoundTabChange(round: string) {
+    this.roundTabChangeEvent.emit(round);
   }
 }

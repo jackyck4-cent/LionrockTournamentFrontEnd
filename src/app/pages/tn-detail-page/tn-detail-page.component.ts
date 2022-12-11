@@ -55,18 +55,15 @@ export class TnDetailPageComponent implements OnInit {
     tree
     */
 
-    // [this.players_info, this.tn_info] = this.backend.getTn(this.tn_id)
     this.backend.getPlayerList([]).subscribe((res) => {
       if (res.status == 1) {
         this.players_info = res.data;
       }
-      // console.log(`tn-detail-page: backend.getTn.subscribe(): players_info = ${JSON.stringify(this.players_info)}`);
     });
     this.backend.getTn(this.tn_id).subscribe((res) => {
       if (res.status == 1) {
         this.tn_info = res.data ?? {};
       }
-      // console.log(`tn-detail-page: backend.getTn.subscribe(): tn_info = ${JSON.stringify(this.tn_info)}`);
     });
   }
 

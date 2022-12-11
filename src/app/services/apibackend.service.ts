@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DUMMYDATA } from '../shared/dummy_all_data';
-import { PlayerInfo } from '../shared/player_info';
 import { TnInfo } from '../shared/tn_info';
-import { BackendInterface } from './backend-interface';
 
 import { endpoint } from "../shared/endpoint";
 import {
@@ -12,7 +9,6 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators"; 
-//import { AsyncLocalStorage } from 'async_hooks';
 
 @Injectable({
   providedIn: 'root',
@@ -228,12 +224,11 @@ export class ApibackendService {
     );
   }
 
-
+  // get a tournament information
   getTn(tn_id: string): Observable<any> {
     this.loadToken();
     let api = `${this.endpoint}/tournments2/info/`+tn_id;
    
-  //  alert(api);
     return this.http.get(api, this.httpOptions ).pipe(
       map((res) => {
         return res || {};

@@ -16,10 +16,8 @@ import { TnManagePageComponent } from './pages/tn-manage-page/tn-manage-page.com
 import { TnCreatePageComponent } from './pages/tn-create-page/tn-create-page.component';
 
 const routes: Routes = [
-  //  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
-  
+
   { path: '', component: HomeComponent },
-  //{path: '', redirectTo: '/welcome', pathMatch: 'full'},
   
   { path: 'log-in', component: SigninComponent },
   { path: 'sign-up', component: SignupComponent },

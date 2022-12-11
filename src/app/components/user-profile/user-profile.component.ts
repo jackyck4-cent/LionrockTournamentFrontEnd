@@ -43,13 +43,8 @@ export class UserProfileComponent implements OnInit {
 
   saveprofile()
   {
-    //console.log("123")
-    //console.log(this.signupForm.value)
     this.authService.changeuser(this.signupForm.value).subscribe((res) => {
-      //console.log(res);
       if (res.status == 1) {
-        //this.signupForm.reset();
-
         localStorage.setItem("display_name",  res.info.display_name);
         
         alert("Profile updated");
