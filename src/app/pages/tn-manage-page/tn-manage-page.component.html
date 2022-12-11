@@ -1,58 +1,59 @@
 <div class="container">
   
-    <div class="page-title">Tournament Management</div>
+  <div class="page-title">Tournament Management</div>
 
-    <app-tn-detail
-      [tn_id]="tn_id"
-      [config]="tn_detail__displayconfig"
-      (boutChangeEvent)="boutschange($event)" 
-      (infoChangeEvent)="infoChangeEvent($event)" 
-      
-      [page_type]="'manage'"
-    ></app-tn-detail>
-  
-    <div class="button-row">
-        <button
-            mat-raised-button
-            color="primary"
-            (click)="onButton('start_enrolling')"
-            [hidden]="isHiddenButton('start_enrolling')">
-          Start Enrolling
-        </button>
-        <button
-            mat-raised-button
-            color="primary"
-            (click)="onButton('start_game')"
-            [hidden]="isHiddenButton('start_game')">
-          Start the tournament
-        </button>
-        <button
-            mat-raised-button
-            color="primary"
-            (click)="onButton('set_winners')" 
-            [hidden]="isHiddenButton('set_winners')">
-          Set winners
-        </button>
-        <button
-            mat-raised-button
-            color="primary"
-            (click)="onButton('next_round')"
-            [hidden]="isHiddenButton('next_round')">
-          Proceed to Next Round
-        </button>
+  <app-tn-detail
+    [tn_id]="tn_id"
+    [config]="tn_detail__displayconfig"
+    (boutChangeEvent)="boutschange($event)" 
+    (infoChangeEvent)="infoChangeEvent($event)" 
+    [page_type]="'manage'"
+  ></app-tn-detail>
 
-        <button
-            mat-stroked-button
-            (click)="onButton('modify')"
-            [hidden]="isHiddenButton('modify')">
-          Modify
-        </button>
-        <button
-            mat-stroked-button
-            (click)="onButton('delete')"
-            [hidden]="isHiddenButton('delete')">
-          <i>Delete</i>
-        </button>
-    </div>
+  <div class="button-row">
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('start_enrolling')"
+          [hidden]="isHiddenButton('start_enrolling')">
+        Start Enrolling
+      </button>
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('start_game')"
+          [hidden]="isHiddenButton('start_game')">
+        Start the tournament
+      </button>
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="onButton('next_round')"
+          [hidden]="isHiddenButton('next_round')">
+        Proceed to Next Round
+      </button>
+      <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!ifChangedBouts()"
+          (click)="onButton('set_winners')" 
+          [hidden]="isHiddenButton('set_winners')">
+        Set Winners
+      </button>
+      <br>
+      <button
+        mat-stroked-button
+        (click)="onButton('modify')"
+        [hidden]="isHiddenButton('modify')">
+        Modify
+      </button>
+      <button
+          mat-stroked-button
+          style="color:gray"
+          (click)="onButton('delete')"
+          [hidden]="isHiddenButton('delete')">
+        <i>Delete</i>
+      </button>
   </div>
+</div>
   

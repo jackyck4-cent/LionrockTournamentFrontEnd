@@ -23,6 +23,7 @@ export class TnManagePageComponent implements OnInit {
   tn_info!: TnInfo;
   players_info!: Map<string, PlayerInfo>;
   state_winner : boolean = false;
+  private prev_bouts: string = '';
 
   /*
   Jacky 
@@ -50,6 +51,7 @@ export class TnManagePageComponent implements OnInit {
       this.backend.getTn(this.tn_id).subscribe((res) => {
         if (res.status == 1) {
           this.tn_info = <TnInfo> res.data ?? {};
+          this.updatePrevBoutsStr();
           console.log(`tn-manage-page: tn_info = ${JSON.stringify(this.tn_info)}`);
         }
       });
@@ -93,6 +95,18 @@ export class TnManagePageComponent implements OnInit {
     return false;
   }
 
+  ifChangedBouts(): boolean {
+    if (this.tn_info) {
+      let s = JSON.stringify(this.tn_info.bouts);
+      return (this.prev_bouts != s);
+    } 
+    return false;
+  }
+
+  private updatePrevBoutsStr() {
+    this.prev_bouts = JSON.stringify(this.tn_info.bouts);
+  }
+
   isHiddenButton(btn: string): boolean {
       if (this.tn_info) {
       switch (btn) {
@@ -120,7 +134,7 @@ export class TnManagePageComponent implements OnInit {
         case 'start_enrolling':
           this.backend.enrollnow(this.tn_id).subscribe((res) => {
             if (res.status == 1) {
-              this.reloadComponent();
+              this.router.navigate([`tn-detail/${this.tn_id}`]);
             } else {
               alert(`Failed to register to the tournament: status=${res.status}`);
             }
@@ -141,6 +155,7 @@ export class TnManagePageComponent implements OnInit {
           //alert(`Not yet implemented: "${btn}" button`);
           this.backend.setRoundWinners(this.tn_id , this.tn_info).subscribe((res) => {
             if (res.status == 1) {
+              this.updatePrevBoutsStr();
               this.tn_info = (res.data)
               this.reloadComponent();
             } else {
@@ -163,16 +178,17 @@ export class TnManagePageComponent implements OnInit {
           this.router.navigate([`tn-create/${this.tn_id}`])
           break;
         case 'delete':
-          //alert(`Not yet implemented: "${btn}" button`);
-          
-          this.backend.removenow(this.tn_id).subscribe((res) => {
-            if (res.status == 1) {
-              //this.reloadComponent();
-              this.router.navigate(['tn-list']);
-            } else {
-              alert(`Failed to register to the tournament: status=${res.status}`);
-            }
-          });
+          if (confirm('Are you sure to delete this tournament?')) {
+            this.backend.removenow(this.tn_id).subscribe((res) => {
+              if (res.status == 1) {
+                //this.reloadComponent();
+                alert('Tournament is deleted');
+                this.router.navigate(['tn-list']);
+              } else {
+                alert(`Failed to register to the tournament: status=${res.status}`);
+              }
+            });
+          }
           break;
       }
     }

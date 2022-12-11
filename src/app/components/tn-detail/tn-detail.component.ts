@@ -52,10 +52,6 @@ export class TnDetailComponent implements OnInit {
     }
   }
 
-  onTestButton(): void {
-    console.log(`Test Button:  ${JSON.stringify(this.tn_info)}`)
-  }
-
   getUserName(user_id: string): string {
     // console.log(`this.players_info=${JSON.stringify(this.players_info)}`)
     return this.players_info.get(user_id)?.name ?? '<unknown-user>';
