@@ -26,9 +26,9 @@
   </div>
   <ng-template #players__show_round_tabs>
     <div [hidden]="config.hidden.includes('players')">
-      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
-        <div *ngIf="tn_info.size >= 16">
-          <mat-tab label="Round of 16">
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms"  [selectedIndex]="selectedIndex" >
+       
+          <mat-tab label="Round of 16" *ngIf="tn_info.size >= 16">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
                 <tr [hidden]="!shouldButtonClickable('_16')">
@@ -60,9 +60,9 @@
               </table>
             </div>
           </mat-tab>
-        </div>
-        <div *ngIf="tn_info.size >= 8">
-          <mat-tab label="Quarter-final">
+        
+       
+          <mat-tab label="Quarter-final" *ngIf="tn_info.size >= 8">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
                 <tr [hidden]="!shouldButtonClickable('_8')">
@@ -94,9 +94,9 @@
               </table>
             </div>
           </mat-tab>
-        </div>
-        <div *ngIf="tn_info.size >= 4">
-          <mat-tab label="Semi-final">
+       
+       
+          <mat-tab label="Semi-final" *ngIf="tn_info.size >= 4">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
                 <tr [hidden]="!shouldButtonClickable('_4')">
@@ -128,9 +128,9 @@
               </table>
             </div>
           </mat-tab>
-        </div>
-        <div *ngIf="tn_info.size >= 2">
-          <mat-tab label="Final">
+       
+       
+          <mat-tab label="Final" *ngIf="tn_info.size >= 2">
             <div style="margin-bottom:30px; margin-top:20px;">
               <table class="full-width" cellspacing="0">
                 <tr [hidden]="!shouldButtonClickable('_2')">
@@ -162,7 +162,7 @@
               </table>
             </div>
           </mat-tab>
-        </div>
+      
       </mat-tab-group>
     </div>
   </ng-template>

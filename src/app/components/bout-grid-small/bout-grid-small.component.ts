@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output , EventEmitter, ChangeDetectorRef} from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { PlayerInfo } from 'src/app/shared/player_info';
 import { TnInfo } from 'src/app/shared/tn_info';
@@ -30,10 +30,54 @@ export class BoutGridSmallComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<string>();
 
-  constructor(private backend: ApibackendService) { }
+  selectedIndex: number = 0;
+
+  constructor(private backend: ApibackendService , private change: ChangeDetectorRef) { 
+
+    
+
+  }
 
   ngOnInit(): void {
     //console.log(this.tn_info);
+    var that = this;
+    window.setTimeout(()=>{
+
+      console.log(that);
+      console.log(that.tn_info.current_round);
+      switch (this.tn_info.size)
+      {
+        case 4:
+          if (this.tn_info.current_round == "_2" )
+            this.selectedIndex = 2;
+          else
+            this.selectedIndex = 1;
+          break;
+
+        case 8:
+          if (this.tn_info.current_round == "_2" )
+            this.selectedIndex = 3;
+          else if (this.tn_info.current_round == "_4" )
+            this.selectedIndex = 2;
+          else 
+            this.selectedIndex = 1;
+          break;
+
+        case 16:
+          if (this.tn_info.current_round == "_2" )
+            this.selectedIndex = 4;
+          else if (this.tn_info.current_round == "_4" )
+            this.selectedIndex = 3;
+            else if (this.tn_info.current_round == "_8" )
+            this.selectedIndex = 2;
+          else 
+            this.selectedIndex = 1;
+          break;
+      }
+      this.change.markForCheck();
+      
+      
+   }, 2000 ) ;
   }
 
   getUserName(user_id: string): string {
