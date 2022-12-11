@@ -1,27 +1,38 @@
 <div class="container">
   <div class="page-title">Tournaments</div>
 
-  <div class="button-row" *ngIf="this.authService.isLoggedIn">
-    <mat-button-toggle-group name="tn-list-filters" multiple>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_registered" (change)="toggleFilter('registered')">My Tournaments</mat-button-toggle>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_owned" (change)="toggleFilter('owned')">Owned</mat-button-toggle>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_enrolling" (change)="toggleFilter('enrolling')">Enrolling</mat-button-toggle>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_started" (change)="toggleFilter('started')">Started</mat-button-toggle>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_completed" (change)="toggleFilter('completed')">Completed</mat-button-toggle>
-      <mat-button-toggle class="toggle-buttons" [checked]="opt_draft" (change)="toggleFilter('draft')">Draft</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div> 
   <br>
-  <div *ngIf="this.authService.isLoggedIn">
-    <div class="button-row">
+  <div>
+    <span *ngIf="this.authService.isLoggedIn" class="button-row" style="margin-right: 20px">
       <button
           mat-raised-button
           color="primary"
           (click)="onButton('create-tn')">
         Create New Tournament
       </button>
-    </div>
-    <br>
+    </span>
+    <span>
+      <mat-button-toggle-group name="tn-list-filters" multiple>
+        <mat-button-toggle 
+            [checked]="opt_enrolling" (change)="toggleFilter('enrolling')">
+            Enrolling
+        </mat-button-toggle>
+        <mat-button-toggle 
+            [checked]="opt_started" (change)="toggleFilter('started')">
+            Started
+        </mat-button-toggle>
+        <mat-button-toggle 
+            [checked]="opt_completed" (change)="toggleFilter('completed')">
+            Completed
+        </mat-button-toggle>
+        <mat-button-toggle 
+            *ngIf="this.authService.isLoggedIn"
+            [checked]="opt_draft" (change)="toggleFilter('draft')">
+            Draft
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </span>
   </div>
+  <br>
   <app-tn-list></app-tn-list>
 </div>

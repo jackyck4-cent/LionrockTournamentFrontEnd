@@ -81,6 +81,7 @@ export class TnDetailPageComponent implements OnInit {
         if (this.backend.getMyUserId()
             && this.tn_info
             && this.tn_info.status == 'enrolling'
+            && this.tn_info.players.length < this.tn_info.size
             && !this.tn_info.players.includes(this.backend.getMyUserId())) {
           return false;
         }
@@ -94,6 +95,7 @@ export class TnDetailPageComponent implements OnInit {
       
       if (  this.tn_info
             && this.tn_info.status == 'enrolling'
+            && this.tn_info.players.length < this.tn_info.size
       ) 
         {
           return false;

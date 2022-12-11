@@ -90,6 +90,7 @@ export class TnDetailComponent implements OnInit {
       case 'draft':
         return 'Draft';
     }
+    //return `Unknown status "${this.tn_info.status}"`;
     return '';
   }
 
